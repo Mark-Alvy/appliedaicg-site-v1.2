@@ -42,11 +42,11 @@ const heroFl: Fl[] = [
   { t: "ball", s: 34, p: "bottom-[0px] right-[5%]", k: 3, d: 2.2, du: 4.6, o: 0.75, sm: true, u: true },
 ];
 const strategyFl: Fl[] = [
-  { t: "orange", s: 34, p: "left-[2%] top-[8%]", k: 4, d: 1 },
-  { t: "dot", s: 14, p: "right-[6%] top-[4%]", k: 1, d: 5 },
-  { t: "cube", s: 30, p: "right-[0%] bottom-[12%]", k: 6, d: 3 },
-  { t: "ring", s: 26, p: "left-[0%] bottom-[18%]", k: 8, d: 6 },
-  { t: "ball", s: 22, p: "left-[44%] bottom-[0%]", k: 2, d: 8 },
+  { t: "cube", s: 34, p: "left-[9%] top-[10px]", k: 3, d: 1.4, du: 4.7, o: 0.75, u: true },
+  { t: "ball", s: 24, p: "left-[47%] top-[28px]", k: 6, d: 3.1, du: 3.4, o: 0.7, u: true },
+  { t: "orange", s: 38, p: "right-[7%] top-[4px]", k: 1, d: 0.6, du: 5.4, o: 0.8, u: true },
+  { t: "orange", s: 28, p: "bottom-[2px] left-[38%]", k: 8, d: 2.4, du: 4.1, o: 0.7, u: true },
+  { t: "ball", s: 32, p: "bottom-[0px] right-[13%]", k: 4, d: 4, du: 3.9, o: 0.75, u: true },
 ];
 const aboutFl: Fl[] = [
   { t: "cube", s: 28, p: "-left-2 top-[14%]", k: 3, d: 2, o: 0.55, sm: true },
@@ -154,7 +154,7 @@ function Platforms() {
 function Imperative() {
   return (
     <section id="approach" className="relative overflow-hidden py-16 md:py-28">
-      <div className="container-x grid items-center gap-10 md:grid-cols-12">
+      <div className="container-x grid items-center gap-10 md:grid-cols-12 md:gap-16">
         <Reveal dir="left" className="md:col-span-7">
           <span className="eyebrow">{imperative.eyebrow}</span>
           <p className="mt-6 text-lg leading-relaxed text-ink sm:text-xl md:text-2xl">
@@ -164,8 +164,10 @@ function Imperative() {
           <p className="mt-6 text-base leading-relaxed text-slate sm:text-lg md:text-xl">{imperative.p2}</p>
         </Reveal>
         <Reveal dir="right" className="relative md:col-span-5">
-          <img src={img.strategyIllustration} alt="Illustration of strategic AI transformation" width={932} height={890} className="anim-float relative mx-auto w-full max-w-sm md:max-w-md" />
-          {floaters(strategyFl)}
+          <div className="relative md:pb-8 md:pt-12">
+            <img src={img.strategyIllustration} alt="Illustration of strategic AI transformation" width={932} height={890} className="anim-float relative mx-auto w-full max-w-sm md:max-w-md" />
+            {floaters(strategyFl)}
+          </div>
         </Reveal>
       </div>
     </section>
