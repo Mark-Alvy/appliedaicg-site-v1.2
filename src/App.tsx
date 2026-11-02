@@ -69,6 +69,7 @@ function Hero() {
             {hero.lines[2]}
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-slate sm:text-lg md:mx-0">{hero.sub}</p>
+          <p className="mx-auto mt-4 max-w-xl text-sm font-medium leading-relaxed text-navy sm:text-base md:mx-0">{hero.audience}</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3 md:justify-start">
             <a href="#contact" className="btn-primary">{hero.primary}</a>
             <a href="#process" className="btn-ghost">{hero.secondary} →</a>

@@ -17,6 +17,7 @@ export const nav = [
 export const hero = {
   lines: ["AI that runs the business,", "not a pilot", "that sits beside it."],
   sub: "Applied AI Consulting Group designs the operating layer that connects your people, data, workflows, and models, then builds the agents that do the work.",
+  audience: "For leadership teams that need AI running inside the business, not sitting beside it. Proven in legal, financial services, healthcare, and software.",
   primary: "Book a 30 minute call",
   secondary: "See how we work",
   trust: "Former clients in legal, financial services, healthcare, and enterprise software, including Siemens EDA, Mayer Brown, and Metropolitan Commercial Bank.",
