@@ -21,7 +21,10 @@ async function alvyReply(history: Msg[]): Promise<string> {
 
 function Orb() {
   return (
-    <img src="/img/alvy-orb.gif" alt="" width={360} height={270} className="mx-auto w-44 sm:w-52" aria-hidden />
+    <div className="relative mx-auto h-[300px] w-[300px]" aria-hidden>
+      <div className="breathe pointer-events-none absolute left-1/2 top-1/2 -ml-[240px] -mt-[240px] h-[480px] w-[480px] rounded-full bg-[radial-gradient(circle_closest-side,#3B82F6_0%,#F472B6_65%,transparent_100%)] blur-[40px]" />
+      <img src="/img/alvy-orb-final.gif" alt="" width={300} height={300} className="relative block" />
+    </div>
   );
 }
 
@@ -63,17 +66,17 @@ export default function Alvy() {
   }
 
   return (
-    <section id="contact" className="surface-soft relative overflow-hidden py-14 md:py-24">
+    <section id="contact" className="surface-soft relative overflow-hidden py-16">
       <div className="container-x relative max-w-4xl text-center">
         <Orb />
-        <h2 className="h2">
+        <h2 className="text-[32px] font-bold leading-[1.1] tracking-tight">
           <span className="grad-text-alvy">Hi, I'm Alvy</span>
         </h2>
-        <p className="mt-3 text-base text-slate sm:text-lg">Your AI assistant for scheduling free strategy sessions</p>
+        <p className="mt-2 text-[15px] text-slate">Your AI assistant for scheduling free strategy sessions</p>
 
         {/* Gradient bordered chat panel */}
         <div className="grad-live mt-8 rounded-[22px] p-[3px] shadow-[0_30px_80px_-30px_rgba(37,99,235,0.45)]">
-          <div className="flex h-[380px] flex-col overflow-hidden rounded-[20px] bg-gradient-to-b from-white to-mist sm:h-[420px]">
+          <div className="flex h-[304px] flex-col overflow-hidden rounded-[20px] bg-gradient-to-b from-white to-mist sm:h-[336px]">
             <div ref={scroller} className="flex-1 space-y-3 overflow-y-auto px-5 py-5 text-left">
               {messages.length === 0 && !thinking && (
                 <div className="flex h-full items-end justify-center pb-2">
@@ -125,39 +128,41 @@ export default function Alvy() {
         </div>
         <p className="mt-3 text-xs text-slate/70">Alvy is an AI agent built by Applied AI Consulting Group. It schedules calls and answers questions about our services. It does not give advice.</p>
 
-        {/* Form toggle */}
-        <button type="button" onClick={() => setFormOpen(!formOpen)} className="btn-ghost mt-8 max-w-full gap-4 border border-line bg-white text-center">
-          <span>
-            <span className="block text-lg font-bold">Or Fill Out This Form</span>
-            <span className="block text-sm font-normal text-slate">{contact.formSub}</span>
-          </span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={"transition " + (formOpen ? "rotate-180" : "")}><path d="M6 9l6 6 6-6" /></svg>
-        </button>
-
-        {formOpen && (
-          <form onSubmit={onSubmit} className="card anim-rise mx-auto mt-6 max-w-2xl text-left">
-            <h3 className="text-2xl font-bold text-ink">{contact.formHeading}</h3>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <input name="name" required placeholder="Full name" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20" />
-              <input name="email" type="email" required placeholder="Work email" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20" />
-              <input name="company" placeholder="Company" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20 sm:col-span-2" />
-              <textarea name="message" required rows={4} placeholder="What are you trying to get done?" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20 sm:col-span-2" />
-              {status === "sent" ? (
-                <p role="status" className="text-base font-medium text-ink sm:col-span-2">Thank you. Your message has reached Mark and he will be in touch shortly.</p>
-              ) : (
-                <button type="submit" disabled={status === "sending"} className="btn-primary sm:col-span-2 disabled:opacity-60">
-                  {status === "sending" ? "Sending" : "Send message →"}
-                </button>
-              )}
-              {status === "error" && <p className="text-sm text-red-600 sm:col-span-2">Something went wrong. Email us at {site.email}.</p>}
-            </div>
-          </form>
-        )}
-
-        <div className="card mx-auto mt-8 max-w-2xl text-center">
+        {/* Single tier: booking first, form as a quiet text link */}
+        <div className="mx-auto mt-8 max-w-2xl text-center">
           <h3 className="text-lg font-bold text-ink">{contact.bookHeading}</h3>
           <p className="mt-1 text-base text-slate">{contact.bookSub}</p>
-          <a href={site.bookingUrl} target="_blank" rel="noreferrer" className="btn-primary mt-4 w-full sm:w-auto">Pick a time on the calendar →</a>
+          <div className="mt-4 flex justify-center">
+            <a href={site.bookingUrl} target="_blank" rel="noreferrer" className="btn-primary">Pick a time on the calendar →</a>
+          </div>
+          <div className="mt-5">
+            <button type="button" onClick={() => setFormOpen(!formOpen)} aria-expanded={formOpen} className="mx-auto inline-flex flex-col items-center text-gray-500 transition-colors hover:text-blue">
+              <span className="inline-flex items-center gap-1.5 text-base font-medium">
+                Or Fill Out This Form
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={"transition " + (formOpen ? "rotate-180" : "")}><path d="M6 9l6 6 6-6" /></svg>
+              </span>
+              <span className="text-sm">{contact.formSub}</span>
+            </button>
+          </div>
+          {formOpen && (
+            <form onSubmit={onSubmit} className="card anim-rise mx-auto mt-6 max-w-2xl text-left">
+              <h3 className="text-2xl font-bold text-ink">{contact.formHeading}</h3>
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <input name="name" required placeholder="Full name" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20" />
+                <input name="email" type="email" required placeholder="Work email" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20" />
+                <input name="company" placeholder="Company" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20 sm:col-span-2" />
+                <textarea name="message" required rows={4} placeholder="What are you trying to get done?" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20 sm:col-span-2" />
+                {status === "sent" ? (
+                  <p role="status" className="text-base font-medium text-ink sm:col-span-2">Thank you. Your message has reached Mark and he will be in touch shortly.</p>
+                ) : (
+                  <button type="submit" disabled={status === "sending"} className="btn-primary sm:col-span-2 disabled:opacity-60">
+                    {status === "sending" ? "Sending" : "Send message →"}
+                  </button>
+                )}
+                {status === "error" && <p className="text-sm text-red-600 sm:col-span-2">Something went wrong. Email us at {site.email}.</p>}
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </section>
