@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 import { site, nav, hero, imperative, services, approach, process, growth, testimonials, faq, footer } from "./content";
 
 // Flip to true once Nina Flax, Nicole Ornelas, and Tony Bridwell have signed off on their quotes.
-const SHOW_PENDING_TESTIMONIALS = false;
+const SHOW_PENDING_TESTIMONIALS = true;
 
 const clientLogo: Record<string, string> = {
   "Timo Nentwich": img.clientLogos.siemens,
