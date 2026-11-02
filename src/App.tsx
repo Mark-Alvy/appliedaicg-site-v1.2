@@ -107,7 +107,7 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="top" className="surface-soft relative flex items-center justify-center overflow-hidden pb-6 pt-10 lg:pb-8 lg:pt-14">
+    <section id="top" className="surface-soft relative flex items-center justify-center overflow-hidden pb-10 pt-14 lg:pb-14 lg:pt-20">
       <div className="container-x relative grid items-center gap-8 lg:grid-cols-2">
         <div className="anim-slide-left space-y-6 text-center lg:text-left">
           <div className="space-y-3">
