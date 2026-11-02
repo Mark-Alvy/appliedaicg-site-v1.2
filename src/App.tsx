@@ -212,7 +212,7 @@ function Approach() {
         </Reveal>
         <Reveal dir="right" className="relative mx-auto md:col-span-5 md:col-start-8 md:row-span-2 md:row-start-1 md:self-center">
           <div className="group relative mx-auto w-fit p-3">
-            <div className="pointer-events-none absolute left-1/2 top-1/2 h-[312px] w-[312px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_closest-side,#9162F3_0%,#EE79CA_65%,transparent_100%)] opacity-60 blur-[40px] transition-opacity duration-300 ease-in-out group-hover:opacity-80 sm:h-[374px] sm:w-[374px] md:h-[416px] md:w-[416px]" aria-hidden />
+            <div className="pointer-events-none absolute left-1/2 top-1/2 h-[312px] w-[312px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_closest-side,#8B6CF5_0%,#5B8CF5_65%,transparent_100%)] opacity-60 blur-[40px] transition-opacity duration-300 ease-in-out group-hover:opacity-80 sm:h-[374px] sm:w-[374px] md:h-[416px] md:w-[416px]" aria-hidden />
             <img src={img.mark} alt="Mark Alvarez, Founder and Principal Consultant" width={640} height={773} className="relative aspect-square transition-transform duration-300 group-hover:scale-105 w-60 rounded-full object-cover object-top shadow-xl ring-4 ring-white sm:w-72 md:w-80" />
           </div>
           <div className="mt-6 text-center">
