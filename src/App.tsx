@@ -278,7 +278,7 @@ function Faq() {
           <div className="mt-10 divide-y divide-line rounded-2xl border border-line bg-white shadow-sm">
             {faq.map((f) => (
               <details key={f.q} className="group px-5 py-5 sm:px-6">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-navy">
+                <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 font-semibold text-navy">
                   {f.q}
                   <span className="text-xl text-blue transition group-open:rotate-45">+</span>
                 </summary>
@@ -303,14 +303,14 @@ function Footer() {
         </div>
         <div className="text-sm">
           <p className="font-semibold">Let's connect</p>
-          <a href={`mailto:${site.email}`} className="mt-2 block text-white/70 hover:text-white">{site.email}</a>
+          <a href={`mailto:${site.email}`} className="block py-3 text-white/70 hover:text-white">{site.email}</a>
           <p className="mt-2 text-white/70">{footer.location}</p>
         </div>
         <div className="text-sm">
           <p className="font-semibold">Links</p>
-          <a href={site.linkedinCompany} target="_blank" rel="noreferrer" className="mt-2 block text-white/70 hover:text-white">Applied AI Consulting Group on LinkedIn</a>
-          <a href={site.linkedinMark} target="_blank" rel="noreferrer" className="mt-2 block text-white/70 hover:text-white">Mark Alvarez on LinkedIn</a>
-          <a href="/privacy.html" className="mt-2 block text-white/70 hover:text-white">Privacy policy</a>
+          <a href={site.linkedinCompany} target="_blank" rel="noreferrer" className="block py-3 text-white/70 hover:text-white">Applied AI Consulting Group on LinkedIn</a>
+          <a href={site.linkedinMark} target="_blank" rel="noreferrer" className="block py-3 text-white/70 hover:text-white">Mark Alvarez on LinkedIn</a>
+          <a href="/privacy.html" className="block py-3 text-white/70 hover:text-white">Privacy policy</a>
         </div>
       </div>
       <div className="container-x mt-10 border-t border-white/10 pt-6 text-xs text-white/50">© {new Date().getFullYear()} Applied AI Consulting Group. All rights reserved.</div>
@@ -321,8 +321,9 @@ function Footer() {
 export default function App() {
   return (
     <>
+      <a href="#main" className="skip-link">Skip to main content</a>
       <Header />
-      <main>
+      <main id="main">
         <Hero />
         <Platforms />
         <Imperative />
