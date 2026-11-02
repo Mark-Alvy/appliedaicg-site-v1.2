@@ -152,9 +152,7 @@ export default function Alvy() {
         <div className="card mx-auto mt-8 max-w-2xl text-left">
           <h3 className="text-lg font-bold text-navy">{contact.bookHeading}</h3>
           <p className="mt-1 text-sm text-slate">{contact.bookSub}</p>
-          <div className="mt-4 flex min-h-40 items-center justify-center rounded-xl border border-dashed border-line bg-mist p-6 text-center text-sm text-slate">
-            Calendar booking embed goes here (Google Workspace appointment schedule).
-          </div>
+          <iframe src={site.bookingUrl} title="Book a 30 minute call with Mark Alvarez" className="mt-4 h-[600px] w-full rounded-xl border border-line bg-white" loading="lazy" />
         </div>
       </div>
     </section>

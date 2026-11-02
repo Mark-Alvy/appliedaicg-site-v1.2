@@ -3,7 +3,7 @@ export const site = {
   email: "markalvarez@appliedaicg.com",
   linkedinCompany: "https://www.linkedin.com/company/applied-ai-consulting-group/",
   linkedinMark: "https://www.linkedin.com/in/-markalvarez/",
-  bookingUrl: "#contact",
+  bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2iE6S-fzoiLRH_niXeiC3QwCQ_gPNX1QkUDXjTjcJSikGzT8w89q3xt187yoQH119-PsTbM3c4?gv=true",
   formspree: "https://formspree.io/f/mgvyoygb",
 };
 
