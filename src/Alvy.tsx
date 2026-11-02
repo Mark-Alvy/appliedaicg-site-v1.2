@@ -22,7 +22,6 @@ async function alvyReply(history: Msg[]): Promise<string> {
 function Orb() {
   return (
     <div className="relative mx-auto mb-2.5 h-14 w-14" aria-hidden>
-      <div className="breathe pointer-events-none absolute left-1/2 top-1/2 -ml-[45px] -mt-[45px] h-[90px] w-[90px] rounded-full bg-[radial-gradient(circle_closest-side,#3B82F6_0%,#F472B6_65%,transparent_100%)] opacity-50 blur-[24px]" />
       <div className="relative h-14 w-14 overflow-hidden rounded-full">
         <img src="/img/alvy-orb-final.gif" alt="" width={56} height={56} className="h-full w-full object-cover mix-blend-multiply" />
       </div>
@@ -78,7 +77,7 @@ export default function Alvy() {
 
         {/* Gradient bordered chat panel */}
         <div className="grad-live mt-8 rounded-[22px] p-[3px] shadow-[0_30px_80px_-30px_rgba(37,99,235,0.45)]">
-          <div className="flex h-[304px] flex-col overflow-hidden rounded-[20px] bg-gradient-to-b from-white to-mist sm:h-[336px]">
+          <div className="flex h-[60vh] flex-col overflow-hidden rounded-[20px] bg-gradient-to-b from-white to-mist md:h-[520px]">
             <div ref={scroller} className="flex-1 space-y-3 overflow-y-auto px-5 py-5 text-left">
               {messages.length === 0 && !thinking && (
                 <div className="flex h-full items-end justify-center pb-2">
