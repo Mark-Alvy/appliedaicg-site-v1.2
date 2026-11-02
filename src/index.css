@@ -13,7 +13,7 @@
   --color-pink: #f472b6;
   --color-fuchsia: #d946ef;
   --color-mint: #22c55e;
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 html { scroll-behavior: smooth; }
@@ -22,27 +22,32 @@ body { @apply bg-white text-ink font-sans antialiased; }
 .container-x { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
 .eyebrow { @apply inline-block rounded-full bg-blue-50 px-4 py-1.5 text-xs font-semibold tracking-widest text-blue-deep; }
 .h2 { @apply mt-5 text-3xl font-bold tracking-tight text-navy sm:text-4xl lg:text-5xl; }
-.lead { @apply mt-5 max-w-2xl text-lg leading-relaxed text-slate; }
+.lead { @apply mt-5 max-w-2xl text-base leading-relaxed text-slate sm:text-lg; }
 .grad-text { @apply bg-gradient-to-r from-blue to-purple bg-clip-text text-transparent; }
+.grad-text-alvy { background: linear-gradient(90deg, #3b82f6, #d946ef, #f472b6); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .btn-primary { @apply inline-flex items-center justify-center rounded-full bg-blue px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue/30 transition hover:-translate-y-0.5 hover:bg-blue-deep hover:shadow-xl; }
 .btn-ghost { @apply inline-flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold text-navy transition hover:bg-mist; }
-.card { @apply rounded-2xl border border-line bg-white p-7 shadow-[0_10px_40px_-15px_rgba(2,8,23,0.12)] transition hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(37,99,235,0.35)]; }
+.card { @apply rounded-2xl border border-line bg-white p-6 shadow-[0_10px_40px_-15px_rgba(2,8,23,0.14)] transition hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(37,99,235,0.35)] sm:p-7; }
 .tile { @apply flex h-12 w-12 items-center justify-center rounded-xl text-lg font-bold text-white shadow-md; }
 .surface-soft { background: linear-gradient(to bottom right, #f9fafb, #f3f4f6); }
 
 @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-14px) } }
-@keyframes float-slow { 0%,100% { transform: translateY(0) rotate(0deg) } 50% { transform: translateY(-22px) rotate(6deg) } }
-@keyframes orbit { 0% { transform: rotate(0deg) translateX(10px) rotate(0deg) } 100% { transform: rotate(360deg) translateX(10px) rotate(-360deg) } }
+@keyframes orbit { 0% { transform: rotate(0deg) translateX(14px) rotate(0deg) } 100% { transform: rotate(360deg) translateX(14px) rotate(-360deg) } }
+@keyframes orbit-rev { 0% { transform: rotate(360deg) translateX(18px) rotate(-360deg) } 100% { transform: rotate(0deg) translateX(18px) rotate(0deg) } }
 @keyframes gradient-shift { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
 @keyframes rise { from { opacity: 0; transform: translateY(18px) } to { opacity: 1; transform: translateY(0) } }
+@keyframes grow-line { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+@keyframes orb-a { 0%,100% { transform: translate(0,0) scale(1) } 33% { transform: translate(8%,-6%) scale(1.08) } 66% { transform: translate(-6%,6%) scale(0.95) } }
+@keyframes orb-b { 0%,100% { transform: translate(0,0) scale(1) } 33% { transform: translate(-8%,6%) scale(1.05) } 66% { transform: translate(6%,-8%) scale(1.1) } }
+@keyframes orb-c { 0%,100% { transform: translate(0,0) rotate(0deg) } 50% { transform: translate(5%,5%) rotate(180deg) } }
 
 .anim-float { animation: float 5s ease-in-out infinite; }
-.anim-float-slow { animation: float-slow 8s ease-in-out infinite; }
-.anim-orbit { animation: orbit 14s linear infinite; }
+.anim-orbit { animation: orbit 12s linear infinite; }
+.anim-orbit-rev { animation: orbit-rev 16s linear infinite; }
 .anim-rise { animation: rise 0.8s ease-out both; }
 .grad-live {
   background: linear-gradient(270deg, #3b82f6, #d946ef, #f472b6, #3b82f6);
-  background-size: 300% 300%;
+  background-size: 400% 400%;
   animation: gradient-shift 8s ease infinite;
 }
 .hero-bg {
@@ -52,4 +57,26 @@ body { @apply bg-white text-ink font-sans antialiased; }
     linear-gradient(to bottom, #ffffff, #f8fafc);
 }
 .ring-orb { position: absolute; border-radius: 9999px; filter: blur(40px); opacity: 0.55; pointer-events: none; }
-@media (prefers-reduced-motion: reduce) { .anim-float,.anim-float-slow,.anim-orbit,.grad-live,.anim-rise { animation: none; } }
+
+/* Alvy orb: layered animated gradient blobs, crisp at any size */
+.orb { position: relative; width: 96px; height: 96px; }
+.orb > span { position: absolute; inset: 0; border-radius: 9999px; filter: blur(6px); }
+.orb .a { background: radial-gradient(circle at 30% 30%, #7dd3fc, #3b82f6 55%, transparent 72%); animation: orb-a 7s ease-in-out infinite; }
+.orb .b { background: radial-gradient(circle at 70% 40%, #e879f9, #a855f7 50%, transparent 72%); mix-blend-mode: multiply; animation: orb-b 9s ease-in-out infinite; }
+.orb .c { background: conic-gradient(from 0deg, #f472b6, #60a5fa, #c084fc, #f472b6); opacity: 0.55; mask: radial-gradient(circle, black 45%, transparent 70%); -webkit-mask: radial-gradient(circle, black 45%, transparent 70%); animation: orb-c 11s linear infinite; }
+.orb .d { inset: 22%; background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.95), rgba(255,255,255,0) 70%); filter: blur(2px); }
+
+/* Scroll reveal */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.reveal-left { opacity: 0; transform: translateX(-28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-right { opacity: 0; transform: translateX(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-left.in, .reveal-right.in { opacity: 1; transform: none; }
+.connector { transform-origin: left; transform: scaleX(0); }
+.in .connector { animation: grow-line 1.4s ease-out 0.3s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-float,.anim-orbit,.anim-orbit-rev,.grad-live,.anim-rise,.orb > span,.connector { animation: none !important; }
+  .reveal,.reveal-left,.reveal-right { opacity: 1; transform: none; transition: none; }
+  .connector { transform: none; }
+}

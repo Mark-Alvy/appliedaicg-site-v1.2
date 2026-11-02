@@ -11,7 +11,7 @@ export const img = {
   cubeBlue: base + "cube-blue.png",
   ballPink: base + "ball-pink.png",
   cubeOrange: base + "cube-orange.png",
-  alvyOrb: base + "alvy-orb.gif",
+  growthIllustration: base + "growth-illustration.webp",
   clientLogos: {
     siemens: base + "client-siemens-eda.png",
     ccs: base + "client-ccs.png",

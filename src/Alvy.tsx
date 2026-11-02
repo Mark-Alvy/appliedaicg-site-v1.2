@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { site, contact } from "./content";
-import { img } from "./assets";
 
 type Msg = { role: "user" | "alvy"; text: string };
 
@@ -21,7 +20,11 @@ async function alvyReply(history: Msg[]): Promise<string> {
 }
 
 function Orb() {
-  return <img src={img.alvyOrb} alt="" className="mx-auto h-24 w-auto mix-blend-multiply md:h-28" aria-hidden />;
+  return (
+    <div className="orb mx-auto" aria-hidden>
+      <span className="a" /><span className="b" /><span className="c" /><span className="d" />
+    </div>
+  );
 }
 
 export default function Alvy() {
@@ -62,17 +65,17 @@ export default function Alvy() {
   }
 
   return (
-    <section id="contact" className="surface-soft relative overflow-hidden py-20 md:py-28">
+    <section id="contact" className="surface-soft relative overflow-hidden py-16 md:py-28">
       <div className="container-x relative max-w-4xl text-center">
         <Orb />
-        <h2 className="mt-5 text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
-          Hi, I'm <span className="bg-gradient-to-r from-blue via-purple to-pink bg-clip-text text-transparent">Alvy</span>
+        <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl md:text-5xl">
+          Hi, I'm <span className="grad-text-alvy">Alvy</span>
         </h2>
-        <p className="mt-3 text-lg text-slate">Your AI assistant for scheduling free strategy sessions</p>
+        <p className="mt-3 text-base text-slate sm:text-lg">Your AI assistant for scheduling free strategy sessions</p>
 
         {/* Gradient bordered chat panel */}
-        <div className="mt-8 rounded-[22px] bg-gradient-to-r from-blue via-violet to-pink p-[3px] shadow-[0_30px_80px_-30px_rgba(37,99,235,0.45)]">
-          <div className="flex h-[420px] flex-col overflow-hidden rounded-[20px] bg-gradient-to-b from-white to-mist">
+        <div className="grad-live mt-8 rounded-[22px] p-[3px] shadow-[0_30px_80px_-30px_rgba(37,99,235,0.45)]">
+          <div className="flex h-[380px] flex-col overflow-hidden rounded-[20px] bg-gradient-to-b from-white to-mist sm:h-[420px]">
             <div ref={scroller} className="flex-1 space-y-3 overflow-y-auto px-5 py-5 text-left">
               {messages.length === 0 && !thinking && (
                 <div className="flex h-full items-end justify-center pb-2">
@@ -105,7 +108,7 @@ export default function Alvy() {
                 </div>
               )}
             </div>
-            <form onSubmit={send} className="flex items-center gap-3 border-t border-line/70 bg-white/70 px-4 py-3 backdrop-blur">
+            <form onSubmit={send} className="flex items-center gap-2 border-t border-line/70 bg-white/70 px-3 py-3 backdrop-blur sm:gap-3 sm:px-4">
               <button type="button" title="Attach a file (coming soon)" className="rounded-md p-2 text-slate/60 transition hover:text-slate" aria-label="Attach">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M21 11.5l-8.5 8.5a5 5 0 0 1-7-7l9-9a3.5 3.5 0 0 1 5 5l-9 9a2 2 0 0 1-3-3l8-8" /></svg>
               </button>
@@ -125,7 +128,7 @@ export default function Alvy() {
         <p className="mt-3 text-xs text-slate/70">Alvy is an AI agent built by Applied AI Consulting Group. It schedules calls and answers questions about our services. It does not give advice.</p>
 
         {/* Form toggle */}
-        <button type="button" onClick={() => setFormOpen(!formOpen)} className="mt-8 inline-flex items-center gap-4 rounded-2xl bg-blue px-8 py-4 text-left text-white shadow-lg shadow-blue/30 transition hover:bg-blue-deep">
+        <button type="button" onClick={() => setFormOpen(!formOpen)} className="mt-8 inline-flex max-w-full items-center gap-4 rounded-2xl bg-blue px-6 py-4 text-left text-white shadow-lg shadow-blue/30 transition hover:bg-blue-deep sm:px-8">
           <span>
             <span className="block text-lg font-bold">Or Fill Out This Form</span>
             <span className="block text-sm text-white/80">{contact.formSub}</span>
