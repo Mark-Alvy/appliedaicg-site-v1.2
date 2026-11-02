@@ -35,7 +35,7 @@ const floaters = (list: Fl[]) =>
 
 const heroFl: Fl[] = [
   { t: "cube", s: 38, p: "left-[3%] top-[14px]", k: 1, d: 0.4, du: 3.3, o: 0.75, sm: true, u: true },
-  { t: "ball", s: 26, p: "left-[46%] top-[36px]", k: 4, d: 2.7, du: 5.1, o: 0.7, sm: true, u: true },
+  { t: "ball", s: 26, p: "left-[calc(50%-13px)] top-[8px]", k: 4, d: 2.7, du: 5.1, o: 0.7, sm: true, u: true },
   { t: "orange", s: 42, p: "right-[24%] top-[4px]", k: 6, d: 1.1, du: 4, o: 0.8, sm: true, u: true },
   { t: "cube", s: 28, p: "right-[0%] top-[48px]", k: 2, d: 3.9, du: 5.7, o: 0.65, sm: true, u: true },
   { t: "orange", s: 30, p: "bottom-[1px] left-[29%]", k: 5, d: 0.9, du: 3.7, o: 0.7, sm: true, u: true },
@@ -154,7 +154,7 @@ function Imperative() {
   return (
     <section id="approach" className="relative overflow-hidden py-14 md:py-24">
       <div className="container-x grid items-center gap-10 md:grid-cols-12 md:gap-16">
-        <Reveal dir="left" className="md:col-span-7">
+        <Reveal dir="right" className="md:order-2 md:col-span-7">
           <span className="eyebrow">{imperative.eyebrow}</span>
           <p className="mt-6 max-w-[35rem] text-base leading-relaxed text-gray-700 sm:text-lg">
             <span className="font-semibold text-purple">Most companies now own more AI than they use.</span>{" "}
@@ -165,7 +165,7 @@ function Imperative() {
             <span className="font-semibold text-pink-600">{imperative.p2.slice(imperative.p2.indexOf("The result is"))}</span>
           </p>
         </Reveal>
-        <Reveal dir="right" className="relative md:col-span-5">
+        <Reveal dir="left" className="relative md:order-1 md:col-span-5">
           <div className="relative md:pb-8 md:pr-9 md:pt-12">
             <img src={img.strategyIllustration} alt="Illustration of strategic AI transformation" width={932} height={890} className="anim-float relative mx-auto w-full max-w-sm md:max-w-md" />
             {floaters(strategyFl)}
