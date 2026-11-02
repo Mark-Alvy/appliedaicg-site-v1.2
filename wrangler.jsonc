@@ -1,0 +1,7 @@
+{
+  "name": "appliedaicg-site-v1-2",
+  "compatibility_date": "2026-11-02",
+  "assets": {
+    "directory": "./dist"
+  }
+}
