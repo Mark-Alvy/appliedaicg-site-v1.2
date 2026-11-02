@@ -227,7 +227,7 @@ function Approach() {
         <Reveal dir="right" className="relative mx-auto md:col-span-5">
           <div className="relative p-6">
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-50 to-purple-50" />
-            <div className="absolute inset-6 scale-110 rounded-full bg-gradient-to-br from-purple via-fuchsia to-pink opacity-55 blur-[22px]" aria-hidden />
+            <div className="absolute inset-6 scale-[1.03] rounded-full bg-gradient-to-br from-purple-700 to-purple-900 opacity-30 blur-[12px]" aria-hidden />
             <img src={img.mark} alt="Mark Alvarez, Founder and Principal Consultant" width={640} height={773} className="relative aspect-square w-60 rounded-full object-cover object-top shadow-xl ring-4 ring-white sm:w-72 md:w-80" />
             {floaters(aboutFl)}
           </div>
