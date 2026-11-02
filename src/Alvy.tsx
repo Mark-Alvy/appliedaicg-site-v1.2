@@ -63,7 +63,7 @@ export default function Alvy() {
   }
 
   return (
-    <section id="contact" className="surface-soft relative overflow-hidden py-16 md:py-28">
+    <section id="contact" className="surface-soft relative overflow-hidden py-14 md:py-24">
       <div className="container-x relative max-w-4xl text-center">
         <Orb />
         <h2 className="h2">
@@ -136,14 +136,14 @@ export default function Alvy() {
 
         {formOpen && (
           <form onSubmit={onSubmit} className="card anim-rise mx-auto mt-6 max-w-2xl text-left">
-            <h3 className="text-2xl font-bold text-navy">{contact.formHeading}</h3>
+            <h3 className="text-2xl font-bold text-ink">{contact.formHeading}</h3>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <input name="name" required placeholder="Full name" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20" />
               <input name="email" type="email" required placeholder="Work email" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20" />
               <input name="company" placeholder="Company" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20 sm:col-span-2" />
               <textarea name="message" required rows={4} placeholder="What are you trying to get done?" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20 sm:col-span-2" />
               {status === "sent" ? (
-                <p role="status" className="text-base font-medium text-navy sm:col-span-2">Thank you. Your message has reached Mark and he will be in touch shortly.</p>
+                <p role="status" className="text-base font-medium text-ink sm:col-span-2">Thank you. Your message has reached Mark and he will be in touch shortly.</p>
               ) : (
                 <button type="submit" disabled={status === "sending"} className="btn-primary sm:col-span-2 disabled:opacity-60">
                   {status === "sending" ? "Sending" : "Send message →"}
@@ -155,8 +155,8 @@ export default function Alvy() {
         )}
 
         <div className="card mx-auto mt-8 max-w-2xl text-center">
-          <h3 className="text-lg font-bold text-navy">{contact.bookHeading}</h3>
-          <p className="mt-1 text-sm text-slate">{contact.bookSub}</p>
+          <h3 className="text-lg font-bold text-ink">{contact.bookHeading}</h3>
+          <p className="mt-1 text-base text-slate">{contact.bookSub}</p>
           <a href={site.bookingUrl} target="_blank" rel="noreferrer" className="btn-primary mt-4 w-full sm:w-auto">Pick a time on the calendar →</a>
         </div>
       </div>

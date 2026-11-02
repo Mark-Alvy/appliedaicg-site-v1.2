@@ -73,7 +73,7 @@ function Header() {
       <div className="container-x flex h-16 items-center justify-between">
         <a href="#top" className="flex items-center gap-3">
           <img src={img.logoMark} alt="" className="h-9 w-auto" />
-          <span className="text-sm font-bold tracking-tight text-navy sm:text-base">{site.name}</span>
+          <span className="text-sm font-bold tracking-tight text-ink sm:text-base">{site.name}</span>
         </a>
         <nav className="hidden items-center gap-6 lg:flex">
           {nav.slice(0, 3).map((n) => (
@@ -84,7 +84,7 @@ function Header() {
           <a href="#contact" className="text-sm font-semibold" style={{ background: "linear-gradient(90deg,#3b82f6,#d946ef,#f472b6)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>Ask Alvy</a>
           <a href="#contact" className="rounded-full bg-blue px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-blue-deep">Request a Call</a>
         </nav>
-        <button className="rounded-md p-2 text-navy lg:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(!open)}>
+        <button className="rounded-md p-2 text-ink lg:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(!open)}>
           {open
             ? <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 6l12 12M18 6L6 18" /></svg>
             : <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 7h16M4 12h16M4 17h16" /></svg>}
@@ -94,9 +94,9 @@ function Header() {
         <div className="border-t border-line bg-white lg:hidden">
           <div className="container-x flex flex-col gap-1 py-3">
             {nav.map((n) => (
-              <a key={n.href} href={n.href} onClick={() => setOpen(false)} className="rounded-lg px-3 py-3 text-base font-medium text-navy hover:bg-mist">{n.label}</a>
+              <a key={n.href} href={n.href} onClick={() => setOpen(false)} className="rounded-lg px-3 py-3 text-base font-medium text-ink hover:bg-mist">{n.label}</a>
             ))}
-            <a href={site.linkedinCompany} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="rounded-lg px-3 py-3 text-base font-medium text-navy hover:bg-mist">LinkedIn</a>
+            <a href={site.linkedinCompany} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="rounded-lg px-3 py-3 text-base font-medium text-ink hover:bg-mist">LinkedIn</a>
             <a href="#contact" onClick={() => setOpen(false)} className="rounded-lg px-3 py-3 text-base font-semibold" style={{ background: "linear-gradient(90deg,#3b82f6,#d946ef,#f472b6)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>Ask Alvy</a>
             <a href="#contact" onClick={() => setOpen(false)} className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-blue px-5 py-3 text-sm font-semibold text-white">Request a Call</a>
           </div>
@@ -108,23 +108,23 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="top" className="surface-soft relative flex items-center justify-center overflow-hidden pb-10 pt-14 lg:pb-14 lg:pt-20">
+    <section id="top" className="surface-soft relative flex items-center justify-center overflow-hidden pb-12 pt-16 lg:pb-16 lg:pt-24">
       <div className="container-x relative grid items-center gap-8 lg:grid-cols-2">
         <div className="anim-slide-left space-y-6 text-center lg:text-left">
           <div className="space-y-3">
-            <h1 className="text-5xl font-light leading-[1.05] tracking-tight text-navy lg:text-7xl">
+            <h1 className="text-5xl font-light leading-[1.05] tracking-tight text-ink lg:text-7xl">
               {hero.lines[0]}<br />
               <span className="grad-text font-semibold">{hero.lines[1]}</span><br />
               <span className="font-semibold">{hero.lines[2]}</span>
             </h1>
-            <p className="anim-fade-d8 mx-auto max-w-2xl text-lg font-light leading-relaxed text-slate lg:mx-0 lg:text-xl">{hero.sub}</p>
-            <p className="anim-fade-d8 mx-auto max-w-2xl text-sm font-medium leading-relaxed text-navy sm:text-base lg:mx-0">{hero.audience}</p>
+            <p className="anim-fade-d8 mx-auto max-w-xl text-lg leading-relaxed text-gray-700 lg:mx-0 lg:text-xl">{hero.sub}</p>
+            <p className="anim-fade-d8 mx-auto max-w-xl text-base leading-relaxed text-gray-700 lg:mx-0">{hero.audience}</p>
           </div>
           <div className="anim-fade-d12 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
             <a href="#contact" className="inline-flex transform items-center justify-center rounded-full bg-blue px-8 py-4 text-lg font-medium text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-orange-500 hover:shadow-xl">{hero.primary}</a>
             <a href="#process" className="btn-ghost">{hero.secondary} →</a>
           </div>
-          <p className="anim-fade-d12 mx-auto max-w-xl pt-4 text-sm leading-relaxed text-slate lg:mx-0">{hero.trust}</p>
+          <p className="anim-fade-d12 mx-auto max-w-xl pt-4 text-base leading-relaxed text-slate lg:mx-0">{hero.trust}</p>
         </div>
         <div className="anim-slide-right relative ml-auto flex items-center justify-end">
           <div className="relative pb-8 pt-[84px]">
@@ -154,15 +154,15 @@ function Platforms() {
 
 function Imperative() {
   return (
-    <section id="approach" className="relative overflow-hidden py-16 md:py-28">
+    <section id="approach" className="relative overflow-hidden py-14 md:py-24">
       <div className="container-x grid items-center gap-10 md:grid-cols-12 md:gap-16">
         <Reveal dir="left" className="md:col-span-7">
           <span className="eyebrow">{imperative.eyebrow}</span>
-          <p className="mt-6 text-lg leading-relaxed text-ink sm:text-xl md:text-2xl">
+          <p className="mt-6 max-w-[35rem] text-base leading-relaxed text-gray-700 sm:text-lg">
             <span className="font-semibold text-purple">Most companies now own more AI than they use.</span>{" "}
             {imperative.p1.replace("Most companies now own more AI than they use. ", "")}
           </p>
-          <p className="mt-6 text-base leading-relaxed text-slate sm:text-lg md:text-xl">
+          <p className="mt-6 max-w-[35rem] text-base leading-relaxed text-slate sm:text-lg">
             {imperative.p2.slice(0, imperative.p2.indexOf("The result is"))}
             <span className="font-semibold text-pink-600">{imperative.p2.slice(imperative.p2.indexOf("The result is"))}</span>
           </p>
@@ -180,7 +180,7 @@ function Imperative() {
 
 function Services() {
   return (
-    <section id="services" className="surface-soft relative overflow-hidden py-16 md:py-28">
+    <section id="services" className="surface-soft relative overflow-hidden py-14 md:py-24">
       <div className="container-x relative text-center">
         <Reveal>
           <span className="eyebrow">{services.eyebrow}</span>
@@ -193,10 +193,10 @@ function Services() {
               <article className="card group flex h-full flex-col hover:-translate-y-2 hover:border-blue/40">
                 <div className={"flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-white shadow-md transition duration-300 group-hover:scale-110 group-hover:rotate-6 " + badge[i]}>{i + 1}</div>
                 <p className="mt-6 text-xs font-semibold tracking-widest text-slate">{c.tag}</p>
-                <h3 className="mt-2 text-xl font-bold text-navy">{c.title}</h3>
-                <p className="mt-2 text-sm font-semibold text-navy">What?</p>
+                <h3 className="mt-2 text-xl font-bold text-ink">{c.title}</h3>
+                <p className="mt-2 text-sm font-semibold text-ink">What?</p>
                 <p className="mt-1 text-slate">{c.what}</p>
-                <p className="mt-4 text-sm font-semibold text-navy">Ideal for:</p>
+                <p className="mt-4 text-sm font-semibold text-ink">Ideal for:</p>
                 <p className="mt-1 text-slate">{c.ideal}</p>
               </article>
             </Reveal>
@@ -209,7 +209,7 @@ function Services() {
 
 function Approach() {
   return (
-    <section id="about" className="relative overflow-hidden py-16 md:py-28">
+    <section id="about" className="relative overflow-hidden py-14 md:py-24">
       <div className="container-x grid items-center gap-12 md:grid-cols-12">
         <Reveal dir="left" className="md:col-span-7">
           <span className="eyebrow">{approach.eyebrow}</span>
@@ -217,10 +217,10 @@ function Approach() {
           <p className="lead">{approach.body}</p>
           <div id="results" className="mt-8 rounded-2xl border border-blue-100 bg-blue-50/60 p-6">
             <span className="text-xs font-semibold tracking-widest text-blue-deep">{approach.resultsEyebrow}</span>
-            <p className="mt-2 text-lg font-medium text-navy">{approach.results}</p>
+            <p className="mt-2 text-lg text-ink">{approach.results}</p>
           </div>
           <div className="mt-8">
-            <h3 className="text-xl font-bold text-navy">{approach.bioTitle}</h3>
+            <h3 className="text-xl font-bold text-ink">{approach.bioTitle}</h3>
             <p className="text-sm font-semibold text-purple">{approach.bioRole}</p>
             <p className="mt-3 text-slate">{approach.bio}</p>
             <a href={site.linkedinMark} className="mt-4 inline-block text-sm font-semibold text-blue hover:underline" target="_blank" rel="noreferrer">Connect with Mark on LinkedIn →</a>
@@ -241,7 +241,7 @@ function Approach() {
 
 function Process() {
   return (
-    <section id="process" className="surface-soft relative overflow-hidden py-16 md:py-28">
+    <section id="process" className="surface-soft relative overflow-hidden py-14 md:py-24">
       <div className="container-x text-center">
         <Reveal>
           <span className="eyebrow">{process.eyebrow}</span>
@@ -254,8 +254,8 @@ function Process() {
             {process.steps.map((s, i) => (
               <div key={s.title} className="card relative text-center">
                 <div className={"tile mx-auto bg-gradient-to-br " + tileGrad[i]}>{s.n}</div>
-                <h3 className="mt-5 text-xl font-bold text-navy">{s.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate">{s.body}</p>
+                <h3 className="mt-5 text-xl font-bold text-ink">{s.title}</h3>
+                <p className="mt-3 text-base leading-relaxed text-slate">{s.body}</p>
               </div>
             ))}
           </div>
@@ -267,7 +267,7 @@ function Process() {
 
 function Growth() {
   return (
-    <section className="relative overflow-hidden py-16 md:py-28">
+    <section className="relative overflow-hidden py-14 md:py-24">
       <div className="container-x relative grid items-center gap-12 md:grid-cols-12">
         <Reveal dir="left" className="md:col-span-7">
           <span className="eyebrow">{growth.eyebrow}</span>
@@ -279,7 +279,7 @@ function Growth() {
                 <div className={"tile shrink-0 bg-gradient-to-br " + tileGrad[i]}>{i + 1}</div>
                 <div>
                   <p className="text-xs font-semibold tracking-widest text-slate">STEP {i + 1}</p>
-                  <h3 className="mt-1 text-lg font-bold text-navy">{s.title}</h3>
+                  <h3 className="mt-1 text-lg font-bold text-ink">{s.title}</h3>
                   <p className="mt-2 text-slate">{s.body}</p>
                 </div>
               </li>
@@ -298,7 +298,7 @@ function Growth() {
 function Testimonials() {
   const items = testimonials.items.filter((t) => SHOW_PENDING_TESTIMONIALS || !t.pending);
   return (
-    <section className="py-16 md:py-28">
+    <section className="py-14 md:py-24">
       <div className="container-x text-center">
         <Reveal>
           <span className="eyebrow">{testimonials.eyebrow}</span>
@@ -311,7 +311,7 @@ function Testimonials() {
                 {clientLogo[t.name] && <img src={clientLogo[t.name]} alt="" className="mb-5 h-8 w-auto self-start object-contain" />}
                 <blockquote className="flex-1 italic leading-relaxed text-slate">“{t.quote}”</blockquote>
                 <figcaption className="mt-6">
-                  <div className="font-semibold text-navy">{t.name}</div>
+                  <div className="font-semibold text-ink">{t.name}</div>
                   <div className="text-sm text-slate">{t.title}</div>
                 </figcaption>
               </figure>
@@ -325,14 +325,14 @@ function Testimonials() {
 
 function Faq() {
   return (
-    <section className="surface-soft py-16 md:py-28">
+    <section className="surface-soft py-14 md:py-24">
       <div className="container-x max-w-3xl">
         <Reveal>
           <h2 className="h2 mt-0 text-center">Frequently asked <span className="grad-text">questions</span></h2>
           <div className="mt-10 divide-y divide-line rounded-2xl border border-line bg-white shadow-sm">
             {faq.map((f) => (
               <details key={f.q} className="group px-5 py-5 sm:px-6">
-                <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 font-semibold text-navy">
+                <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 font-semibold text-ink">
                   {f.q}
                   <span className="text-xl text-blue transition group-open:rotate-45">+</span>
                 </summary>

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #1f2937;
+  --color-ink: #111827;
   --color-navy: #0b1f3a;
   --color-slate: #4b5563;
   --color-mist: #f8fafc;
@@ -24,12 +24,12 @@ body { @apply bg-white text-ink font-sans antialiased; }
 
 .container-x { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
 .eyebrow { @apply inline-block rounded-full bg-blue-50 px-4 py-1.5 text-xs font-semibold tracking-widest text-blue-deep; }
-.h2 { @apply mt-5 text-3xl font-bold tracking-tight text-navy sm:text-4xl lg:text-5xl; }
-.lead { @apply mt-5 max-w-2xl text-base leading-relaxed text-slate sm:text-lg; }
+.h2 { @apply mt-5 text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl; }
+.lead { @apply mt-6 max-w-[35rem] text-base leading-relaxed text-slate sm:text-lg; }
 .grad-text { @apply bg-gradient-to-r from-blue to-purple bg-clip-text text-transparent; }
 .grad-text-alvy { background: linear-gradient(90deg, #3b82f6, #d946ef, #f472b6); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .btn-primary { @apply inline-flex items-center justify-center rounded-full bg-blue px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue/30 transition hover:-translate-y-0.5 hover:bg-blue-deep hover:shadow-xl; }
-.btn-ghost { @apply inline-flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold text-navy transition hover:bg-mist; }
+.btn-ghost { @apply inline-flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold text-ink transition hover:bg-mist; }
 .card { @apply rounded-2xl border border-line bg-white p-6 shadow-[0_10px_40px_-15px_rgba(2,8,23,0.14)] transition hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(37,99,235,0.35)] sm:p-7; }
 .tile { @apply flex h-12 w-12 items-center justify-center rounded-xl text-lg font-bold text-white shadow-md; }
 .surface-soft { background: linear-gradient(to bottom right, #f9fafb, #f3f4f6); }
