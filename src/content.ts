@@ -93,7 +93,7 @@ export const contact = {
   bookHeading: "Book a 30 minute call",
   bookSub: "Tell us what you are working on and pick a time that suits you.",
   formHeading: "Or send a note",
-  formSub: "We reply within one business day.",
+  formSub: "We will be in touch.",
 };
 
 export const testimonials = {
