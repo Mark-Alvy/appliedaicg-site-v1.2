@@ -21,9 +21,7 @@ async function alvyReply(history: Msg[]): Promise<string> {
 
 function Orb() {
   return (
-    <div className="orb mx-auto" aria-hidden>
-      <span className="a" /><span className="b" /><span className="c" /><span className="d" />
-    </div>
+    <img src="/img/alvy-orb.gif" alt="" width={360} height={270} className="mx-auto w-44 sm:w-52" aria-hidden />
   );
 }
 
@@ -68,7 +66,7 @@ export default function Alvy() {
     <section id="contact" className="surface-soft relative overflow-hidden py-16 md:py-28">
       <div className="container-x relative max-w-4xl text-center">
         <Orb />
-        <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl md:text-5xl">
+        <h2 className="h2">
           <span className="grad-text-alvy">Hi, I'm Alvy</span>
         </h2>
         <p className="mt-3 text-base text-slate sm:text-lg">Your AI assistant for scheduling free strategy sessions</p>
@@ -128,7 +126,7 @@ export default function Alvy() {
         <p className="mt-3 text-xs text-slate/70">Alvy is an AI agent built by Applied AI Consulting Group. It schedules calls and answers questions about our services. It does not give advice.</p>
 
         {/* Form toggle */}
-        <button type="button" onClick={() => setFormOpen(!formOpen)} className="btn-ghost mt-8 max-w-full gap-4 border border-line bg-white text-left">
+        <button type="button" onClick={() => setFormOpen(!formOpen)} className="btn-ghost mt-8 max-w-full gap-4 border border-line bg-white text-center">
           <span>
             <span className="block text-lg font-bold">Or Fill Out This Form</span>
             <span className="block text-sm font-normal text-slate">{contact.formSub}</span>
@@ -156,7 +154,7 @@ export default function Alvy() {
           </form>
         )}
 
-        <div className="card mx-auto mt-8 max-w-2xl text-left">
+        <div className="card mx-auto mt-8 max-w-2xl text-center">
           <h3 className="text-lg font-bold text-navy">{contact.bookHeading}</h3>
           <p className="mt-1 text-sm text-slate">{contact.bookSub}</p>
           <a href={site.bookingUrl} target="_blank" rel="noreferrer" className="btn-primary mt-4 w-full sm:w-auto">Pick a time on the calendar →</a>

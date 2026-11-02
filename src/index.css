@@ -40,9 +40,6 @@ body { @apply bg-white text-ink font-sans antialiased; }
 @keyframes gradient-shift { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
 @keyframes rise { from { opacity: 0; transform: translateY(18px) } to { opacity: 1; transform: translateY(0) } }
 @keyframes grow-line { from { transform: scaleX(0) } to { transform: scaleX(1) } }
-@keyframes orb-a { 0%,100% { transform: translate(0,0) scale(1) } 33% { transform: translate(8%,-6%) scale(1.08) } 66% { transform: translate(-6%,6%) scale(0.95) } }
-@keyframes orb-b { 0%,100% { transform: translate(0,0) scale(1) } 33% { transform: translate(-8%,6%) scale(1.05) } 66% { transform: translate(6%,-8%) scale(1.1) } }
-@keyframes orb-c { 0%,100% { transform: translate(0,0) rotate(0deg) } 50% { transform: translate(5%,5%) rotate(180deg) } }
 
 .anim-float { animation: float 5s ease-in-out infinite; }
 .anim-orbit { animation: orbit 12s linear infinite; }
@@ -61,13 +58,6 @@ body { @apply bg-white text-ink font-sans antialiased; }
 }
 .ring-orb { position: absolute; border-radius: 9999px; filter: blur(40px); opacity: 0.55; pointer-events: none; }
 
-/* Alvy orb: layered animated gradient blobs, crisp at any size */
-.orb { position: relative; width: 96px; height: 96px; }
-.orb > span { position: absolute; inset: 0; border-radius: 9999px; filter: blur(6px); }
-.orb .a { background: radial-gradient(circle at 30% 30%, #7dd3fc, #3b82f6 55%, transparent 72%); animation: orb-a 7s ease-in-out infinite; }
-.orb .b { background: radial-gradient(circle at 70% 40%, #e879f9, #a855f7 50%, transparent 72%); mix-blend-mode: multiply; animation: orb-b 9s ease-in-out infinite; }
-.orb .c { background: conic-gradient(from 0deg, #f472b6, #60a5fa, #c084fc, #f472b6); opacity: 0.55; mask: radial-gradient(circle, black 45%, transparent 70%); -webkit-mask: radial-gradient(circle, black 45%, transparent 70%); animation: orb-c 11s linear infinite; }
-.orb .d { inset: 22%; background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.95), rgba(255,255,255,0) 70%); filter: blur(2px); }
 
 /* Scroll reveal */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -79,7 +69,7 @@ body { @apply bg-white text-ink font-sans antialiased; }
 .in .connector { animation: grow-line 1.4s ease-out 0.3s both; }
 
 @media (prefers-reduced-motion: reduce) {
-  .anim-float,.anim-orbit,.anim-orbit-rev,.grad-live,.anim-rise,.orb > span,.connector { animation: none !important; }
+  .anim-float,.anim-orbit,.anim-orbit-rev,.grad-live,.anim-rise,.connector { animation: none !important; }
   .reveal,.reveal-left,.reveal-right { opacity: 1; transform: none; transition: none; }
   .connector { transform: none; }
 }
