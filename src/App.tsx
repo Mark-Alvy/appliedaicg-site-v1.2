@@ -50,9 +50,9 @@ const strategyFl: Fl[] = [
 const processFl: Fl[] = [
   { t: "cube", s: 32, p: "left-[2%] top-[6%]", k: 5, d: 2 },
   { t: "dot", s: 14, p: "right-[4%] top-[8%]", k: 3, d: 6 },
-  { t: "orange", s: 36, p: "right-[0%] bottom-[10%]", k: 7, d: 0 },
+  { t: "orange", s: 36, p: "-right-5 -bottom-3", k: 7, d: 0 },
   { t: "diamond", s: 18, p: "left-[0%] bottom-[22%]", k: 2, d: 4 },
-  { t: "ball", s: 22, p: "left-[42%] bottom-[0%]", k: 8, d: 8 },
+  { t: "ball", s: 22, p: "left-[42%] -bottom-9", k: 8, d: 8 },
 ];
 
 function Header() {
