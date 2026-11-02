@@ -48,13 +48,14 @@ const strategyFl: Fl[] = [
   { t: "cube", s: 26, p: "right-[1px] top-[43%]", k: 7, d: 1.9, du: 4.4, o: 0.7, u: true },
 ];
 const aboutFl: Fl[] = [
-  { t: "cube", s: 28, p: "-left-2 top-[14%]", k: 3, d: 2, o: 0.55, sm: true },
-  { t: "ball", s: 16, p: "right-[3%] top-[2%]", k: 5, d: 6, o: 0.5, sm: true },
-  { t: "diamond", s: 14, p: "-right-3 top-[40%]", k: 7, d: 4, o: 0.45, sm: true },
-  { t: "orange", s: 34, p: "right-[9%] bottom-[-2%]", k: 1, d: 0, o: 0.55, sm: true },
-  { t: "dot", s: 10, p: "left-[6%] bottom-[24%]", k: 8, d: 9, o: 0.5, sm: true },
-  { t: "ring", s: 22, p: "left-[30%] -top-3", k: 2, d: 7, o: 0.45, sm: true },
-  { t: "cube", s: 18, p: "left-[2%] bottom-[2%]", k: 6, d: 1, o: 0.5, sm: true },
+  { t: "cube", s: 38, p: "left-[4.6%] top-[5.8%]", k: 2, d: 1.7, du: 8.4, o: 0.75, sm: true },
+  { t: "ball", s: 18, p: "left-[58.7%] top-[1%]", k: 7, d: 5.3, du: 5.2, o: 0.7, sm: true },
+  { t: "orange", s: 44, p: "left-[83.2%] top-[8.7%]", k: 5, d: 0.6, du: 11.3, o: 0.8, sm: true },
+  { t: "ball", s: 14, p: "left-[95.4%] top-[33.9%]", k: 1, d: 3.8, du: 6.7, o: 0.65, sm: true },
+  { t: "cube", s: 26, p: "left-[91.3%] top-[69.7%]", k: 8, d: 7.4, du: 9.6, o: 0.7, sm: true },
+  { t: "orange", s: 34, p: "left-[74.8%] top-[86.8%]", k: 3, d: 2.9, du: 7.1, o: 0.75, sm: true },
+  { t: "ball", s: 22, p: "left-[40.1%] top-[93.5%]", k: 6, d: 9.2, du: 12, o: 0.6, sm: true },
+  { t: "cube", s: 30, p: "left-[1.9%] top-[72.8%]", k: 4, d: 4.6, du: 5.9, o: 0.7, sm: true },
 ];
 const processFl: Fl[] = [
   { t: "cube", s: 32, p: "left-[2%] top-[6%]", k: 5, d: 2 },
@@ -225,10 +226,9 @@ function Approach() {
           </div>
         </Reveal>
         <Reveal dir="right" className="relative mx-auto md:col-span-5">
-          <div className="relative p-6">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-50 to-purple-50" />
-            <div className="absolute inset-6 scale-[1.03] rounded-full bg-gradient-to-br from-purple-700 to-purple-900 opacity-30 blur-[12px]" aria-hidden />
-            <img src={img.mark} alt="Mark Alvarez, Founder and Principal Consultant" width={640} height={773} className="relative aspect-square w-60 rounded-full object-cover object-top shadow-xl ring-4 ring-white sm:w-72 md:w-80" />
+          <div className="group relative p-12">
+            <div className="absolute inset-9 rounded-full bg-gradient-to-br from-purple-700 to-purple-500 opacity-20 blur-[8px] transition-opacity duration-300 group-hover:opacity-30" aria-hidden />
+            <img src={img.mark} alt="Mark Alvarez, Founder and Principal Consultant" width={640} height={773} className="relative aspect-square transition-transform duration-300 group-hover:scale-105 w-60 rounded-full object-cover object-top shadow-xl ring-4 ring-white sm:w-72 md:w-80" />
             {floaters(aboutFl)}
           </div>
         </Reveal>
