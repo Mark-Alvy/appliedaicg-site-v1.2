@@ -212,14 +212,17 @@ function Approach() {
           </div>
         </Reveal>
         <Reveal dir="right" className="relative mx-auto md:col-span-5 md:col-start-8 md:row-span-2 md:row-start-1 md:self-center">
-          <div className="group relative p-3">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-700 to-purple-500 opacity-20 blur-[8px] transition-opacity duration-300 group-hover:opacity-30" aria-hidden />
+          <div className="group relative mx-auto w-fit p-3">
+            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_closest-side,#7e22ce_0%,#a855f7_60%,#f472b6_90%,transparent_100%)] opacity-20 blur-[8px] transition-opacity duration-300 group-hover:opacity-30" aria-hidden />
             <img src={img.mark} alt="Mark Alvarez, Founder and Principal Consultant" width={640} height={773} className="relative aspect-square transition-transform duration-300 group-hover:scale-105 w-60 rounded-full object-cover object-top shadow-xl ring-4 ring-white sm:w-72 md:w-80" />
           </div>
           <div className="mt-6 text-center">
             <h3 className="text-2xl font-bold text-ink">{approach.bioTitle}</h3>
-            <p className="mt-1 text-[15px] font-semibold text-purple lg:whitespace-nowrap">{approach.bioRole}</p>
-            <a href={site.linkedinMark} className="mt-4 inline-flex items-center justify-center rounded-full border border-blue px-5 py-2.5 text-base font-semibold text-blue transition hover:bg-blue hover:text-white" target="_blank" rel="noreferrer">Connect with Mark on LinkedIn →</a>
+            <p className="mt-2 text-[15px] font-semibold leading-snug text-purple">
+              <span className="block">{approach.bioRole.split(",")[0]}</span>
+              <span className="block">{approach.bioRole.split(",").slice(1).join(",").trim()}</span>
+            </p>
+            <a href={site.linkedinMark} className="mt-5 inline-flex items-center justify-center rounded-full border border-blue px-5 py-2.5 text-base font-semibold text-blue transition hover:bg-blue hover:text-white" target="_blank" rel="noreferrer">Connect with Mark on LinkedIn →</a>
           </div>
         </Reveal>
         <Reveal dir="left" className="md:col-span-7 md:col-start-1 md:row-start-2 md:mt-10">
