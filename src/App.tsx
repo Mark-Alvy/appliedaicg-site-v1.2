@@ -141,9 +141,9 @@ function Platforms() {
     <section className="border-y border-line bg-white py-8">
       <div className="container-x">
         <p className="text-center text-xs font-semibold tracking-widest text-slate">BUILT ON THE PLATFORMS YOU ALREADY RUN</p>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-5 sm:gap-x-8">
+        <div className="mt-6 grid grid-cols-3 items-center justify-items-center gap-x-4 gap-y-6 md:grid-cols-9 md:gap-x-3 lg:gap-x-6">
           {img.platforms.map((p) => (
-            <img key={p.name} src={p.src} alt={p.name} title={p.name} className="h-9 w-auto object-contain opacity-90 transition hover:scale-110 hover:opacity-100 sm:h-11" />
+            <img key={p.name} src={p.src} alt={p.name} title={p.name} className="max-h-9 w-auto max-w-full object-contain opacity-90 transition hover:scale-110 hover:opacity-100 sm:max-h-11" />
           ))}
         </div>
       </div>
