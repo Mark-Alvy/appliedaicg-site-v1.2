@@ -35,18 +35,16 @@ const floaters = (list: Fl[]) =>
 
 const heroFl: Fl[] = [
   { t: "cube", s: 38, p: "left-[3%] top-[14px]", k: 1, d: 0.4, du: 3.3, o: 0.75, sm: true, u: true },
-  { t: "ball", s: 26, p: "left-[22%] top-[47px]", k: 4, d: 2.7, du: 5.1, o: 0.7, sm: true, u: true },
-  { t: "orange", s: 42, p: "right-[12%] top-[3px]", k: 6, d: 1.1, du: 4, o: 0.8, sm: true, u: true },
-  { t: "cube", s: 28, p: "right-[1%] top-[46px]", k: 2, d: 3.9, du: 5.7, o: 0.65, sm: true, u: true },
+  { t: "ball", s: 26, p: "left-[46%] top-[36px]", k: 4, d: 2.7, du: 5.1, o: 0.7, sm: true, u: true },
+  { t: "orange", s: 42, p: "right-[24%] top-[4px]", k: 6, d: 1.1, du: 4, o: 0.8, sm: true, u: true },
+  { t: "cube", s: 28, p: "right-[0%] top-[48px]", k: 2, d: 3.9, du: 5.7, o: 0.65, sm: true, u: true },
   { t: "orange", s: 30, p: "bottom-[1px] left-[29%]", k: 5, d: 0.9, du: 3.7, o: 0.7, sm: true, u: true },
   { t: "ball", s: 34, p: "bottom-[0px] right-[5%]", k: 3, d: 2.2, du: 4.6, o: 0.75, sm: true, u: true },
 ];
 const strategyFl: Fl[] = [
   { t: "cube", s: 34, p: "left-[9%] top-[10px]", k: 3, d: 1.4, du: 4.7, o: 0.75, u: true },
-  { t: "ball", s: 24, p: "left-[47%] top-[28px]", k: 6, d: 3.1, du: 3.4, o: 0.7, u: true },
   { t: "orange", s: 38, p: "right-[7%] top-[4px]", k: 1, d: 0.6, du: 5.4, o: 0.8, u: true },
   { t: "orange", s: 28, p: "bottom-[2px] left-[38%]", k: 8, d: 2.4, du: 4.1, o: 0.7, u: true },
-  { t: "ball", s: 32, p: "bottom-[0px] right-[13%]", k: 4, d: 4, du: 3.9, o: 0.75, u: true },
   { t: "cube", s: 26, p: "right-[1px] top-[43%]", k: 7, d: 1.9, du: 4.4, o: 0.7, u: true },
 ];
 const aboutFl: Fl[] = [
