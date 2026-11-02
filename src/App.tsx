@@ -18,7 +18,7 @@ const clientLogo: Record<string, string> = {
 const badge = ["bg-blue", "bg-purple", "bg-mint"];
 const tileGrad = ["from-blue to-violet", "from-purple to-pink", "from-blue-deep to-blue", "from-violet to-purple"];
 
-type Fl = { t: "cube" | "ball" | "orange" | "dot" | "ring" | "diamond"; s: number; p: string; k: number; d: number; o?: number; sm?: boolean };
+type Fl = { t: "cube" | "ball" | "orange" | "dot" | "ring" | "diamond"; s: number; p: string; k: number; d: number; o?: number; sm?: boolean; du?: number; u?: boolean };
 const flSrc = { cube: img.cubeBlue, ball: img.ballPink, orange: img.cubeOrange };
 const flShape = {
   dot: "rounded-full bg-gradient-to-br from-blue to-violet",
@@ -28,19 +28,24 @@ const flShape = {
 // Each floater drifts on its own keyframe (fl-1 to fl-8) with its own phase offset.
 const floaters = (list: Fl[]) =>
   list.map((f, i) => (
-    <span key={i} aria-hidden className={"fl fl-" + f.k + " pointer-events-none absolute " + f.p + (f.sm ? "" : " hidden md:block")} style={{ width: f.s, height: f.s, opacity: f.o ?? 0.9, animationDelay: "-" + f.d + "s" }}>
-      {f.t === "dot" || f.t === "ring" || f.t === "diamond" ? <span className={"block h-full w-full " + flShape[f.t]} /> : <img src={flSrc[f.t]} alt="" className="h-full w-full object-contain" />}
+    <span key={i} aria-hidden className={"fl fl-" + f.k + " pointer-events-none absolute " + (f.u ? "z-20 " : "") + f.p + (f.sm ? "" : " hidden md:block")} style={{ width: f.s, height: f.s, opacity: f.o ?? 0.9, animationDelay: "-" + f.d + "s", ...(f.du ? { animationDuration: f.du + "s" } : {}) }}>
+      {f.t === "dot" || f.t === "ring" || f.t === "diamond" ? <span className={"block h-full w-full " + flShape[f.t]} /> : <img src={flSrc[f.t]} alt="" className={"h-full w-full object-contain" + (f.u ? " scale-75 sm:scale-100" : "")} />}
     </span>
   ));
 
 const heroFl: Fl[] = [
-  { t: "cube", s: 40, p: "left-[1%] top-[5%]", k: 1, d: 0 },
-  { t: "ball", s: 26, p: "right-[5%] top-[3%]", k: 2, d: 3 },
-  { t: "orange", s: 44, p: "right-[0%] top-[46%]", k: 3, d: 5 },
-  { t: "dot", s: 16, p: "left-[0%] top-[50%]", k: 4, d: 2 },
-  { t: "diamond", s: 20, p: "left-[9%] bottom-[5%]", k: 5, d: 7 },
-  { t: "ring", s: 30, p: "right-[17%] bottom-[1%]", k: 6, d: 4 },
-  { t: "dot", s: 12, p: "left-[40%] top-[0%]", k: 7, d: 6 },
+  { t: "cube", s: 40, p: "left-[12%] top-[10%]", k: 1, d: 0, du: 3.5, o: 0.75, sm: true, u: true },
+  { t: "ball", s: 32, p: "left-[8%] top-[21%]", k: 2, d: 1, du: 4.2, o: 0.7, sm: true, u: true },
+  { t: "orange", s: 48, p: "left-[81%] top-[6%]", k: 3, d: 0.7, du: 4.8, o: 0.8, sm: true, u: true },
+  { t: "ball", s: 36, p: "left-[71%] top-[11%]", k: 4, d: 1.5, du: 3.8, o: 0.65, sm: true, u: true },
+  { t: "orange", s: 36, p: "left-[5%] top-[33%]", k: 5, d: 2, du: 4.5, o: 0.7, sm: true, u: true },
+  { t: "cube", s: 32, p: "left-[15%] top-[44%]", k: 6, d: 0.3, du: 3.2, o: 0.75, sm: true, u: true },
+  { t: "cube", s: 40, p: "left-[88%] top-[27%]", k: 7, d: 1.2, du: 4.1, o: 0.65, sm: true, u: true },
+  { t: "orange", s: 36, p: "left-[78%] top-[48%]", k: 8, d: 0.8, du: 3.7, o: 0.7, sm: true, u: true },
+  { t: "cube", s: 44, p: "left-[18%] top-[75%]", k: 2, d: 1.8, du: 4.3, o: 0.75, sm: true, u: true },
+  { t: "ball", s: 32, p: "left-[9%] top-[69%]", k: 5, d: 0.5, du: 3.9, o: 0.7, sm: true, u: true },
+  { t: "cube", s: 36, p: "left-[68%] top-[80%]", k: 1, d: 1.3, du: 4.6, o: 0.65, sm: true, u: true },
+  { t: "ball", s: 40, p: "left-[84%] top-[70%]", k: 6, d: 2.1, du: 3.4, o: 0.7, sm: true, u: true },
 ];
 const strategyFl: Fl[] = [
   { t: "orange", s: 34, p: "left-[2%] top-[8%]", k: 4, d: 1 },
@@ -108,25 +113,29 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="top" className="surface-soft relative overflow-hidden">
-      <div className="container-x relative grid items-center gap-10 py-14 md:grid-cols-12 md:py-24">
-        <div className="anim-rise text-center md:col-span-6 md:text-left">
-          <h1 className="text-4xl font-extrabold leading-[1.08] tracking-tight text-navy sm:text-5xl lg:text-6xl">
-            {hero.lines[0]}<br />
-            <span className="grad-text">{hero.lines[1]}</span><br />
-            {hero.lines[2]}
-          </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-slate sm:text-lg md:mx-0">{hero.sub}</p>
-          <p className="mx-auto mt-4 max-w-xl text-sm font-medium leading-relaxed text-navy sm:text-base md:mx-0">{hero.audience}</p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 md:justify-start">
-            <a href="#contact" className="btn-primary">{hero.primary}</a>
+    <section id="top" className="surface-soft relative flex min-h-[60vh] items-center justify-center overflow-hidden pb-8 pt-5 lg:pb-12 lg:pt-6">
+      <div className="container-x relative grid items-center gap-8 lg:grid-cols-2">
+        <div className="anim-slide-left space-y-6 text-center lg:text-left">
+          <div className="space-y-3">
+            <h1 className="text-5xl font-light leading-tight tracking-tight text-navy lg:text-7xl">
+              {hero.lines[0]}<br />
+              <span className="grad-text font-semibold">{hero.lines[1]}</span><br />
+              <span className="font-semibold">{hero.lines[2]}</span>
+            </h1>
+            <p className="anim-fade-d8 mx-auto max-w-2xl text-lg font-light leading-relaxed text-slate lg:mx-0 lg:text-xl">{hero.sub}</p>
+            <p className="anim-fade-d8 mx-auto max-w-2xl text-sm font-medium leading-relaxed text-navy sm:text-base lg:mx-0">{hero.audience}</p>
+          </div>
+          <div className="anim-fade-d12 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
+            <a href="#contact" className="inline-flex transform items-center justify-center rounded-full bg-blue px-8 py-4 text-lg font-medium text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-orange-500 hover:shadow-xl">{hero.primary}</a>
             <a href="#process" className="btn-ghost">{hero.secondary} →</a>
           </div>
-          <p className="mx-auto mt-8 max-w-xl text-sm leading-relaxed text-slate md:mx-0">{hero.trust}</p>
+          <p className="anim-fade-d12 mx-auto max-w-xl text-sm leading-relaxed text-slate lg:mx-0">{hero.trust}</p>
         </div>
-        <div className="relative md:col-span-6">
-          <img src={img.heroIllustration} alt="Isometric illustration of connected AI systems" width={768} height={600} className="anim-float relative z-10 mx-auto w-full max-w-md md:max-w-xl" />
-          {floaters(heroFl)}
+        <div className="anim-slide-right relative ml-auto flex items-center justify-end">
+          <div className="relative pt-[84px]">
+            <img src={img.heroIllustration} alt="Isometric illustration of connected AI systems" width={768} height={600} className="anim-float w-full max-w-5xl opacity-90" />
+            <div className="pointer-events-none absolute inset-0">{floaters(heroFl)}</div>
+          </div>
         </div>
       </div>
     </section>
