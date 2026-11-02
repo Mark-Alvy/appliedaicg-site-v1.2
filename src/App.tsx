@@ -18,6 +18,54 @@ const clientLogo: Record<string, string> = {
 const badge = ["bg-blue", "bg-purple", "bg-mint"];
 const tileGrad = ["from-blue to-violet", "from-purple to-pink", "from-blue-deep to-blue", "from-violet to-purple"];
 
+type Fl = { t: "cube" | "ball" | "orange" | "dot" | "ring" | "diamond"; s: number; p: string; k: number; d: number; o?: number; sm?: boolean };
+const flSrc = { cube: img.cubeBlue, ball: img.ballPink, orange: img.cubeOrange };
+const flShape = {
+  dot: "rounded-full bg-gradient-to-br from-blue to-violet",
+  ring: "rounded-full border-2 border-violet",
+  diamond: "rotate-45 rounded-md bg-gradient-to-br from-pink to-fuchsia",
+};
+// Each floater drifts on its own keyframe (fl-1 to fl-8) with its own phase offset.
+const floaters = (list: Fl[]) =>
+  list.map((f, i) => (
+    <span key={i} aria-hidden className={"fl fl-" + f.k + " pointer-events-none absolute " + f.p + (f.sm ? "" : " hidden md:block")} style={{ width: f.s, height: f.s, opacity: f.o ?? 0.9, animationDelay: "-" + f.d + "s" }}>
+      {f.t === "dot" || f.t === "ring" || f.t === "diamond" ? <span className={"block h-full w-full " + flShape[f.t]} /> : <img src={flSrc[f.t]} alt="" className="h-full w-full object-contain" />}
+    </span>
+  ));
+
+const heroFl: Fl[] = [
+  { t: "cube", s: 40, p: "left-[1%] top-[5%]", k: 1, d: 0 },
+  { t: "ball", s: 26, p: "right-[5%] top-[3%]", k: 2, d: 3 },
+  { t: "orange", s: 44, p: "right-[0%] top-[46%]", k: 3, d: 5 },
+  { t: "dot", s: 16, p: "left-[0%] top-[50%]", k: 4, d: 2 },
+  { t: "diamond", s: 20, p: "left-[9%] bottom-[5%]", k: 5, d: 7 },
+  { t: "ring", s: 30, p: "right-[17%] bottom-[1%]", k: 6, d: 4 },
+  { t: "dot", s: 12, p: "left-[40%] top-[0%]", k: 7, d: 6 },
+];
+const strategyFl: Fl[] = [
+  { t: "orange", s: 34, p: "left-[2%] top-[8%]", k: 4, d: 1 },
+  { t: "dot", s: 14, p: "right-[6%] top-[4%]", k: 1, d: 5 },
+  { t: "cube", s: 30, p: "right-[0%] bottom-[12%]", k: 6, d: 3 },
+  { t: "ring", s: 26, p: "left-[0%] bottom-[18%]", k: 8, d: 6 },
+  { t: "ball", s: 22, p: "left-[44%] bottom-[0%]", k: 2, d: 8 },
+];
+const aboutFl: Fl[] = [
+  { t: "cube", s: 28, p: "-left-2 top-[14%]", k: 3, d: 2, o: 0.55, sm: true },
+  { t: "ball", s: 16, p: "right-[3%] top-[2%]", k: 5, d: 6, o: 0.5, sm: true },
+  { t: "diamond", s: 14, p: "-right-3 top-[40%]", k: 7, d: 4, o: 0.45, sm: true },
+  { t: "orange", s: 34, p: "right-[9%] bottom-[-2%]", k: 1, d: 0, o: 0.55, sm: true },
+  { t: "dot", s: 10, p: "left-[6%] bottom-[24%]", k: 8, d: 9, o: 0.5, sm: true },
+  { t: "ring", s: 22, p: "left-[30%] -top-3", k: 2, d: 7, o: 0.45, sm: true },
+  { t: "cube", s: 18, p: "left-[2%] bottom-[2%]", k: 6, d: 1, o: 0.5, sm: true },
+];
+const processFl: Fl[] = [
+  { t: "cube", s: 32, p: "left-[2%] top-[6%]", k: 5, d: 2 },
+  { t: "dot", s: 14, p: "right-[4%] top-[8%]", k: 3, d: 6 },
+  { t: "orange", s: 36, p: "right-[0%] bottom-[10%]", k: 7, d: 0 },
+  { t: "diamond", s: 18, p: "left-[0%] bottom-[22%]", k: 2, d: 4 },
+  { t: "ball", s: 22, p: "left-[42%] bottom-[0%]", k: 8, d: 8 },
+];
+
 function Header() {
   const [open, setOpen] = useState(false);
   return (
@@ -78,9 +126,7 @@ function Hero() {
         </div>
         <div className="relative md:col-span-6">
           <img src={img.heroIllustration} alt="Isometric illustration of connected AI systems" width={768} height={600} className="anim-float relative z-10 mx-auto w-full max-w-md md:max-w-xl" />
-          <img src={img.cubeBlue} alt="" className="anim-orbit absolute left-[4%] top-[8%] hidden w-9 md:block" aria-hidden />
-          <img src={img.ballPink} alt="" className="anim-orbit-rev absolute right-[6%] top-[14%] hidden w-7 md:block" aria-hidden />
-          <img src={img.cubeOrange} alt="" className="anim-float absolute bottom-[10%] right-[4%] hidden w-10 md:block [animation-delay:1.5s]" aria-hidden />
+          {floaters(heroFl)}
         </div>
       </div>
     </section>
@@ -116,6 +162,7 @@ function Imperative() {
         </Reveal>
         <Reveal dir="right" className="relative md:col-span-5">
           <img src={img.strategyIllustration} alt="Illustration of strategic AI transformation" width={932} height={890} className="anim-float relative mx-auto w-full max-w-sm md:max-w-md" />
+          {floaters(strategyFl)}
         </Reveal>
       </div>
     </section>
@@ -173,10 +220,9 @@ function Approach() {
         <Reveal dir="right" className="relative mx-auto md:col-span-5">
           <div className="relative p-6">
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-50 to-purple-50" />
+            <div className="absolute inset-6 scale-110 rounded-full bg-gradient-to-br from-purple via-fuchsia to-pink opacity-55 blur-[22px]" aria-hidden />
             <img src={img.mark} alt="Mark Alvarez, Founder and Principal Consultant" width={640} height={773} className="relative aspect-square w-60 rounded-full object-cover object-top shadow-xl ring-4 ring-white sm:w-72 md:w-80" />
-            <img src={img.cubeBlue} alt="" className="anim-orbit absolute left-0 top-10 w-9" aria-hidden />
-            <img src={img.ballPink} alt="" className="anim-orbit-rev absolute right-2 top-16 w-6" aria-hidden />
-            <img src={img.cubeOrange} alt="" className="anim-float absolute bottom-8 right-4 w-9 [animation-delay:2s]" aria-hidden />
+            {floaters(aboutFl)}
           </div>
         </Reveal>
       </div>
@@ -233,8 +279,7 @@ function Growth() {
         </Reveal>
         <Reveal dir="right" className="relative md:col-span-5">
           <img src={img.processIllustration} alt="Isometric illustration of a team building an AI workflow" width={827} height={662} className="anim-float relative mx-auto w-full max-w-xs md:max-w-sm" />
-          <img src={img.cubeBlue} alt="" className="anim-orbit absolute left-[6%] top-[12%] hidden w-8 md:block" aria-hidden />
-          <img src={img.cubeOrange} alt="" className="anim-float absolute bottom-[14%] right-[8%] hidden w-9 md:block" aria-hidden />
+          {floaters(processFl)}
         </Reveal>
       </div>
     </section>
