@@ -17,7 +17,6 @@ const clientLogo: Record<string, string> = {
 };
 const badge = ["bg-blue", "bg-purple", "bg-mint"];
 const badgeText = ["text-blue", "text-purple", "text-mint"];
-const tileGrad = ["from-blue to-violet", "from-purple to-pink", "from-blue-deep to-blue", "from-violet to-purple"];
 
 type Fl = { t: "cube" | "ball" | "orange" | "dot" | "ring" | "diamond"; s: number; p: string; k: number; d: number; o?: number; sm?: boolean; du?: number; u?: boolean };
 const flSrc = { cube: img.cubeBlue, ball: img.ballPink, orange: img.cubeOrange };
@@ -262,16 +261,18 @@ function Process() {
 
 function Growth() {
   return (
-    <section className="relative overflow-hidden py-14 md:py-24">
-      <div className="container-x relative grid items-center gap-12 md:grid-cols-12">
-        <Reveal dir="left" className="md:col-span-7">
+    <section className="relative overflow-hidden bg-gray-50 py-14 md:py-24">
+      <div className="container-x relative grid gap-y-10 md:grid-cols-12 md:gap-x-12 md:gap-y-10">
+        <Reveal dir="left" className="md:col-span-7 md:col-start-1 md:row-start-1">
           <span className="eyebrow">{growth.eyebrow}</span>
           <h2 className="h2">From first call to <span className="grad-text">running agent</span></h2>
           <p className="lead">{growth.intro}</p>
-          <ol className="mt-10 space-y-5">
+        </Reveal>
+        <Reveal dir="left" className="md:col-span-7 md:col-start-1 md:row-start-2">
+          <ol className="space-y-4">
             {growth.steps.map((s, i) => (
-              <li key={s.title} className="card flex gap-4 sm:gap-5">
-                <div className={"tile shrink-0 bg-gradient-to-br " + tileGrad[i]}>{i + 1}</div>
+              <li key={s.title} className="flex gap-4 rounded-[20px] bg-white px-6 py-5 shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,0,0,0.12)]">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-blue-500 text-sm font-bold text-white">{i + 1}</div>
                 <div>
                   <p className="text-xs font-semibold tracking-widest text-slate">STEP {i + 1}</p>
                   <h3 className="mt-1 text-lg font-bold text-ink">{s.title}</h3>
@@ -281,7 +282,7 @@ function Growth() {
             ))}
           </ol>
         </Reveal>
-        <Reveal dir="right" className="relative md:col-span-5">
+        <Reveal dir="right" className="relative md:col-span-5 md:col-start-8 md:row-start-2 md:self-center">
           <img src={img.processIllustration} alt="Isometric illustration of a team building an AI workflow" width={827} height={662} className="anim-float relative mx-auto w-full max-w-xs md:max-w-sm" />
           {floaters(processFl)}
         </Reveal>
@@ -289,7 +290,6 @@ function Growth() {
     </section>
   );
 }
-
 function Testimonials() {
   const items = testimonials.items.filter((t) => SHOW_PENDING_TESTIMONIALS || !t.pending);
   return (
