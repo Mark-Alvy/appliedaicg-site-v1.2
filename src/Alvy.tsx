@@ -21,9 +21,11 @@ async function alvyReply(history: Msg[]): Promise<string> {
 
 function Orb() {
   return (
-    <div className="relative mx-auto h-[300px] w-[300px]" aria-hidden>
-      <div className="breathe pointer-events-none absolute left-1/2 top-1/2 -ml-[240px] -mt-[240px] h-[480px] w-[480px] rounded-full bg-[radial-gradient(circle_closest-side,#3B82F6_0%,#F472B6_65%,transparent_100%)] blur-[40px]" />
-      <img src="/img/alvy-orb-final.gif" alt="" width={300} height={300} className="relative block" />
+    <div className="relative mx-auto mb-2.5 h-14 w-14" aria-hidden>
+      <div className="breathe pointer-events-none absolute left-1/2 top-1/2 -ml-[45px] -mt-[45px] h-[90px] w-[90px] rounded-full bg-[radial-gradient(circle_closest-side,#3B82F6_0%,#F472B6_65%,transparent_100%)] opacity-50 blur-[24px]" />
+      <div className="relative h-14 w-14 overflow-hidden rounded-full">
+        <img src="/img/alvy-orb-final.gif" alt="" width={56} height={56} className="h-full w-full object-cover mix-blend-multiply" />
+      </div>
     </div>
   );
 }
@@ -69,10 +71,10 @@ export default function Alvy() {
     <section id="contact" className="surface-soft relative overflow-hidden py-16">
       <div className="container-x relative max-w-4xl text-center">
         <Orb />
-        <h2 className="text-[32px] font-bold leading-[1.1] tracking-tight">
+        <h2 className="relative text-[32px] font-bold leading-[1.1] tracking-tight">
           <span className="grad-text-alvy">Hi, I'm Alvy</span>
         </h2>
-        <p className="mt-2 text-[15px] text-slate">Your AI assistant for scheduling free strategy sessions</p>
+        <p className="relative mt-2 text-[15px] text-slate">Your AI assistant for scheduling free strategy sessions</p>
 
         {/* Gradient bordered chat panel */}
         <div className="grad-live mt-8 rounded-[22px] p-[3px] shadow-[0_30px_80px_-30px_rgba(37,99,235,0.45)]">
