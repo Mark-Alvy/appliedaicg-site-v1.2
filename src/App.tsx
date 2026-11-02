@@ -331,14 +331,14 @@ function Faq() {
       <div className="container-x max-w-3xl">
         <Reveal>
           <h2 className="h2 mt-0 text-center">Frequently asked <span className="grad-text">questions</span></h2>
-          <div className="mt-10 divide-y divide-line rounded-2xl border border-line bg-white shadow-sm">
+          <div className="mt-10 space-y-3">
             {faq.map((f) => (
-              <details key={f.q} className="group px-5 py-5 sm:px-6">
-                <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 font-semibold text-ink">
+              <details key={f.q} className="group rounded-2xl bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
+                <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 rounded-2xl px-6 py-5 text-lg font-semibold text-ink [&::-webkit-details-marker]:hidden">
                   {f.q}
-                  <span className="text-xl text-blue transition group-open:rotate-45">+</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-blue transition-transform duration-200 group-open:rotate-180" aria-hidden><path d="M6 9l6 6 6-6" /></svg>
                 </summary>
-                <p className="mt-3 leading-relaxed text-slate">{f.a}</p>
+                <p className="max-w-[720px] px-6 pb-5 text-base leading-[1.65] text-gray-700">{f.a}</p>
               </details>
             ))}
           </div>
