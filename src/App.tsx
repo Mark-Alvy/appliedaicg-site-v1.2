@@ -292,6 +292,16 @@ function Growth() {
 }
 function Testimonials() {
   const items = testimonials.items.filter((t) => SHOW_PENDING_TESTIMONIALS || !t.pending);
+  const card = (t: (typeof items)[number], cls: string) => (
+    <figure key={t.name} className={"card flex flex-col " + cls}>
+      {clientLogo[t.name] && <img src={clientLogo[t.name]} alt="" className="mb-5 h-8 w-auto self-start object-contain" />}
+      <blockquote className="flex-1 italic leading-relaxed text-slate">“{t.quote}”</blockquote>
+      <figcaption className="mt-6">
+        <div className="font-semibold text-ink">{t.name}</div>
+        <div className="text-sm text-slate">{t.title}</div>
+      </figcaption>
+    </figure>
+  );
   return (
     <section className="py-14 md:py-24">
       <div className="container-x text-center">
@@ -299,25 +309,22 @@ function Testimonials() {
           <span className="eyebrow">{testimonials.eyebrow}</span>
           <h2 className="h2">What leaders say <span className="grad-text">after the work is done</span></h2>
         </Reveal>
-        <div className="mt-12 grid gap-6 text-left sm:grid-cols-2 md:grid-cols-3">
-          {items.map((t, i) => (
-            <Reveal key={t.name} delay={i * 120} className="h-full">
-              <figure className="card flex h-full flex-col">
-                {clientLogo[t.name] && <img src={clientLogo[t.name]} alt="" className="mb-5 h-8 w-auto self-start object-contain" />}
-                <blockquote className="flex-1 italic leading-relaxed text-slate">“{t.quote}”</blockquote>
-                <figcaption className="mt-6">
-                  <div className="font-semibold text-ink">{t.name}</div>
-                  <div className="text-sm text-slate">{t.title}</div>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
+        {/* Slow continuous carousel; paused on hover or touch; static grid under reduced motion */}
+        <div className="marquee-wrap marquee-mask -my-4 mt-8 overflow-hidden py-4 text-left motion-reduce:hidden">
+          <div className="marquee flex w-max">
+            {items.map((t) => card(t, "mr-6 w-[58vw] shrink-0 sm:w-[346px]"))}
+            <div className="flex" aria-hidden>
+              {items.map((t) => card(t, "mr-6 w-[58vw] shrink-0 sm:w-[346px]"))}
+            </div>
+          </div>
+        </div>
+        <div className="mt-12 hidden gap-6 text-left motion-reduce:grid sm:grid-cols-2 md:grid-cols-3">
+          {items.map((t) => card(t, "h-full"))}
         </div>
       </div>
     </section>
   );
 }
-
 function Faq() {
   return (
     <section className="surface-soft py-14 md:py-24">
