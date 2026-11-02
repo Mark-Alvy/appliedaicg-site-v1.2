@@ -8,7 +8,7 @@ export const site = {
 };
 
 export const nav = [
-  { label: "About Us", href: "#approach" },
+  { label: "About Us", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Process", href: "#process" },
   { label: "Contact", href: "#contact" },

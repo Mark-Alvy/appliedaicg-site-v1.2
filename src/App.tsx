@@ -152,7 +152,7 @@ function Services() {
 
 function Approach() {
   return (
-    <section className="relative overflow-hidden py-16 md:py-28">
+    <section id="about" className="relative overflow-hidden py-16 md:py-28">
       <div className="container-x grid items-center gap-12 md:grid-cols-12">
         <Reveal dir="left" className="md:col-span-7">
           <span className="eyebrow">{approach.eyebrow}</span>
