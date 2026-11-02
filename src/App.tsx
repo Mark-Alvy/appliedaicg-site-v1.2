@@ -111,7 +111,7 @@ function Hero() {
       <div className="container-x relative grid items-center gap-8 lg:grid-cols-2">
         <div className="anim-slide-left space-y-6 text-center lg:text-left">
           <div className="space-y-3">
-            <h1 className="text-5xl font-light leading-tight tracking-tight text-navy lg:text-7xl">
+            <h1 className="text-5xl font-light leading-[1.05] tracking-tight text-navy lg:text-7xl">
               {hero.lines[0]}<br />
               <span className="grad-text font-semibold">{hero.lines[1]}</span><br />
               <span className="font-semibold">{hero.lines[2]}</span>
