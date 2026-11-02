@@ -198,10 +198,11 @@ function Services() {
 }
 
 function Approach() {
+  const bioSplit = approach.bio.indexOf("He holds an Executive MBA");
   return (
     <section id="about" className="relative overflow-hidden py-14 md:py-24">
-      <div className="container-x grid items-center gap-12 md:grid-cols-12">
-        <Reveal dir="left" className="md:col-span-7">
+      <div className="container-x grid gap-y-10 md:grid-cols-12 md:gap-x-16 md:gap-y-0">
+        <Reveal dir="left" className="md:col-span-7 md:col-start-1 md:row-start-1">
           <span className="eyebrow">{approach.eyebrow}</span>
           <h2 className="h2">Practical, measured, <span className="grad-text">built to be owned by you</span></h2>
           <p className="lead">{approach.body}</p>
@@ -209,18 +210,21 @@ function Approach() {
             <span className="text-xs font-semibold tracking-widest text-blue-deep">{approach.resultsEyebrow}</span>
             <p className="mt-2 text-lg text-ink">{approach.results}</p>
           </div>
-          <div className="mt-8">
-            <h3 className="text-xl font-bold text-ink">{approach.bioTitle}</h3>
-            <p className="text-sm font-semibold text-purple">{approach.bioRole}</p>
-            <p className="mt-3 text-slate">{approach.bio}</p>
-            <a href={site.linkedinMark} className="mt-4 inline-block text-sm font-semibold text-blue hover:underline" target="_blank" rel="noreferrer">Connect with Mark on LinkedIn →</a>
-          </div>
         </Reveal>
-        <Reveal dir="right" className="relative mx-auto md:col-span-5">
-          <div className="group relative p-12">
-            <div className="absolute inset-9 rounded-full bg-gradient-to-br from-purple-700 to-purple-500 opacity-20 blur-[8px] transition-opacity duration-300 group-hover:opacity-30" aria-hidden />
+        <Reveal dir="right" className="relative mx-auto md:col-span-5 md:col-start-8 md:row-span-2 md:row-start-1 md:self-center">
+          <div className="group relative p-3">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-700 to-purple-500 opacity-20 blur-[8px] transition-opacity duration-300 group-hover:opacity-30" aria-hidden />
             <img src={img.mark} alt="Mark Alvarez, Founder and Principal Consultant" width={640} height={773} className="relative aspect-square transition-transform duration-300 group-hover:scale-105 w-60 rounded-full object-cover object-top shadow-xl ring-4 ring-white sm:w-72 md:w-80" />
           </div>
+          <div className="mt-6 text-center">
+            <h3 className="text-2xl font-bold text-ink">{approach.bioTitle}</h3>
+            <p className="mt-1 text-[15px] font-semibold text-purple lg:whitespace-nowrap">{approach.bioRole}</p>
+            <a href={site.linkedinMark} className="mt-4 inline-flex items-center justify-center rounded-full border border-blue px-5 py-2.5 text-base font-semibold text-blue transition hover:bg-blue hover:text-white" target="_blank" rel="noreferrer">Connect with Mark on LinkedIn →</a>
+          </div>
+        </Reveal>
+        <Reveal dir="left" className="md:col-span-7 md:col-start-1 md:row-start-2 md:mt-10">
+          <p className="max-w-[35rem] text-base leading-relaxed text-slate sm:text-lg">{approach.bio.slice(0, bioSplit).trim()}</p>
+          <p className="mt-5 max-w-[35rem] text-base leading-relaxed text-slate sm:text-lg">{approach.bio.slice(bioSplit)}</p>
         </Reveal>
       </div>
     </section>
