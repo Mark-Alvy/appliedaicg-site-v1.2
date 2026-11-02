@@ -240,15 +240,15 @@ function Process() {
       <div className="container-x text-center">
         <Reveal>
           <span className="eyebrow">{process.eyebrow}</span>
-          <h2 className="h2">The <span className="grad-text">4D Framework</span>: from workflow to operating capability</h2>
-          <p className="lead mx-auto">{process.intro}</p>
+          <h2 className="mt-5 text-3xl font-medium tracking-tight text-ink sm:text-4xl lg:text-[40px]">The <span className="grad-text">4D Framework</span>: from workflow to operating capability</h2>
+          <p className="mx-auto mt-6 max-w-[720px] text-base leading-relaxed text-slate sm:text-xl">{process.intro}</p>
         </Reveal>
         <Reveal className="relative mt-12">
           <div className="connector absolute left-[12%] right-[12%] top-6 hidden h-0.5 bg-gradient-to-r from-blue via-violet to-pink md:block" aria-hidden />
           <div className="grid gap-6 md:grid-cols-4">
-            {process.steps.map((s, i) => (
+            {process.steps.map((s) => (
               <div key={s.title} className="card relative text-center">
-                <div className={"tile mx-auto bg-gradient-to-br " + tileGrad[i]}>{s.n}</div>
+                <div className="tile mx-auto bg-gradient-to-r from-purple-400 to-blue-500">{s.n}</div>
                 <h3 className="mt-5 text-xl font-bold text-ink">{s.title}</h3>
                 <p className="mt-3 text-base leading-relaxed text-slate">{s.body}</p>
               </div>
