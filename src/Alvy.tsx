@@ -128,10 +128,10 @@ export default function Alvy() {
         <p className="mt-3 text-xs text-slate/70">Alvy is an AI agent built by Applied AI Consulting Group. It schedules calls and answers questions about our services. It does not give advice.</p>
 
         {/* Form toggle */}
-        <button type="button" onClick={() => setFormOpen(!formOpen)} className="mt-8 inline-flex max-w-full items-center gap-4 rounded-2xl bg-blue px-6 py-4 text-left text-white shadow-lg shadow-blue/30 transition hover:bg-blue-deep sm:px-8">
+        <button type="button" onClick={() => setFormOpen(!formOpen)} className="btn-ghost mt-8 max-w-full gap-4 border border-line bg-white text-left">
           <span>
             <span className="block text-lg font-bold">Or Fill Out This Form</span>
-            <span className="block text-sm text-white/80">{contact.formSub}</span>
+            <span className="block text-sm font-normal text-slate">{contact.formSub}</span>
           </span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={"transition " + (formOpen ? "rotate-180" : "")}><path d="M6 9l6 6 6-6" /></svg>
         </button>
