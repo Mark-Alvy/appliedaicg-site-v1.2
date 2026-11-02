@@ -111,9 +111,6 @@ export default function Alvy() {
               )}
             </div>
             <form onSubmit={send} className="flex items-center gap-2 border-t border-line/70 bg-white/70 px-3 py-3 backdrop-blur sm:gap-3 sm:px-4">
-              <button type="button" title="Attach a file (coming soon)" className="rounded-md p-2 text-slate/60 transition hover:text-slate" aria-label="Attach">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M21 11.5l-8.5 8.5a5 5 0 0 1-7-7l9-9a3.5 3.5 0 0 1 5 5l-9 9a2 2 0 0 1-3-3l8-8" /></svg>
-              </button>
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
