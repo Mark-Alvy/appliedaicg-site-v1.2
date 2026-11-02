@@ -16,6 +16,7 @@ const clientLogo: Record<string, string> = {
   "Dr. Tony Bridwell": img.clientLogos.smuCox,
 };
 const badge = ["bg-blue", "bg-purple", "bg-mint"];
+const badgeText = ["text-blue", "text-purple", "text-mint"];
 const tileGrad = ["from-blue to-violet", "from-purple to-pink", "from-blue-deep to-blue", "from-violet to-purple"];
 
 type Fl = { t: "cube" | "ball" | "orange" | "dot" | "ring" | "diamond"; s: number; p: string; k: number; d: number; o?: number; sm?: boolean; du?: number; u?: boolean };
@@ -195,7 +196,7 @@ function Services() {
                 <h3 className="mt-2 text-xl font-bold text-ink">{c.title}</h3>
                 <p className="mt-2 text-sm font-semibold text-ink">What?</p>
                 <p className="mt-1 text-slate">{c.what}</p>
-                <p className="mt-4 text-sm font-semibold text-ink">Ideal for:</p>
+                <p className={"mt-4 text-sm font-semibold " + badgeText[i]}>Ideal for:</p>
                 <p className="mt-1 text-slate">{c.ideal}</p>
               </article>
             </Reveal>
