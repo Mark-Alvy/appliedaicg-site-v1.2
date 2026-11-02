@@ -47,6 +47,7 @@ const strategyFl: Fl[] = [
   { t: "orange", s: 38, p: "right-[7%] top-[4px]", k: 1, d: 0.6, du: 5.4, o: 0.8, u: true },
   { t: "orange", s: 28, p: "bottom-[2px] left-[38%]", k: 8, d: 2.4, du: 4.1, o: 0.7, u: true },
   { t: "ball", s: 32, p: "bottom-[0px] right-[13%]", k: 4, d: 4, du: 3.9, o: 0.75, u: true },
+  { t: "cube", s: 26, p: "right-[1px] top-[43%]", k: 7, d: 1.9, du: 4.4, o: 0.7, u: true },
 ];
 const aboutFl: Fl[] = [
   { t: "cube", s: 28, p: "-left-2 top-[14%]", k: 3, d: 2, o: 0.55, sm: true },
@@ -161,10 +162,13 @@ function Imperative() {
             <span className="font-semibold text-purple">Most companies now own more AI than they use.</span>{" "}
             {imperative.p1.replace("Most companies now own more AI than they use. ", "")}
           </p>
-          <p className="mt-6 text-base leading-relaxed text-slate sm:text-lg md:text-xl">{imperative.p2}</p>
+          <p className="mt-6 text-base leading-relaxed text-slate sm:text-lg md:text-xl">
+            {imperative.p2.slice(0, imperative.p2.indexOf("The result is"))}
+            <span className="font-semibold text-pink-600">{imperative.p2.slice(imperative.p2.indexOf("The result is"))}</span>
+          </p>
         </Reveal>
         <Reveal dir="right" className="relative md:col-span-5">
-          <div className="relative md:pb-8 md:pt-12">
+          <div className="relative md:pb-8 md:pr-9 md:pt-12">
             <img src={img.strategyIllustration} alt="Illustration of strategic AI transformation" width={932} height={890} className="anim-float relative mx-auto w-full max-w-sm md:max-w-md" />
             {floaters(strategyFl)}
           </div>
