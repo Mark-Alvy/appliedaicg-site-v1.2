@@ -348,28 +348,46 @@ function Faq() {
   );
 }
 
+const footerFl: Fl[] = [
+  { t: "cube", s: 56, p: "left-[4%] top-[18%]", k: 3, d: 1.2, du: 7, o: 0.15 },
+  { t: "orange", s: 44, p: "right-[6%] top-[12%]", k: 6, d: 3.1, du: 9, o: 0.15 },
+  { t: "ball", s: 36, p: "left-[46%] bottom-[22%]", k: 8, d: 0.5, du: 8, o: 0.15 },
+];
+const LinkedInIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden className="shrink-0"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" /></svg>
+);
+const fLink = "inline-flex items-center gap-2 text-[15px] text-white/90 transition-colors duration-150 hover:text-blue-300";
+const fHead = "text-[13px] font-semibold uppercase tracking-[0.08em] text-white/60";
+
 function Footer() {
   return (
-    <footer className="relative bg-navy py-14 text-white">
+    <footer className="relative overflow-hidden bg-navy pb-8 pt-16 text-white">
       <div className="grad-live absolute inset-x-0 top-0 h-1" aria-hidden />
-      <div className="container-x grid gap-10 md:grid-cols-3">
-        <div>
-          <img src={img.logoMark} alt="Applied AI Consulting Group" className="h-16 w-auto rounded-lg bg-white p-2" />
-          <p className="mt-4 max-w-xs text-sm text-white/70">{footer.tagline}</p>
+      <div className="pointer-events-none absolute inset-0" aria-hidden>{floaters(footerFl)}</div>
+      <div className="container-x relative">
+        <div className="grid gap-12 md:grid-cols-3 md:gap-10">
+          <div>
+            <img src={img.logoMark} alt="Applied AI Consulting Group" className="h-32 w-auto rounded-[10px] bg-white p-3" />
+            <p className="mt-5 max-w-xs text-[15px] text-white/90">Transforming Business with Practical AI Solutions.</p>
+          </div>
+          <div>
+            <p className={fHead}>Let's connect</p>
+            <ul className="mt-4 space-y-3">
+              <li><a href={`mailto:${site.email}`} className={fLink}>{site.email}</a></li>
+              <li className="text-[15px] text-white/90">{footer.location}</li>
+            </ul>
+          </div>
+          <div>
+            <p className={fHead}>Links</p>
+            <ul className="mt-4 space-y-3">
+              <li><a href={site.linkedinCompany} target="_blank" rel="noreferrer" className={fLink}><LinkedInIcon />Applied AI Consulting Group on LinkedIn</a></li>
+              <li><a href={site.linkedinMark} target="_blank" rel="noreferrer" className={fLink}><LinkedInIcon />Mark Alvarez on LinkedIn</a></li>
+              <li><a href="/privacy.html" className={fLink}>Privacy policy</a></li>
+            </ul>
+          </div>
         </div>
-        <div className="text-sm">
-          <p className="font-semibold">Let's connect</p>
-          <a href={`mailto:${site.email}`} className="block py-3 text-white/70 hover:text-white">{site.email}</a>
-          <p className="mt-2 text-white/70">{footer.location}</p>
-        </div>
-        <div className="text-sm">
-          <p className="font-semibold">Links</p>
-          <a href={site.linkedinCompany} target="_blank" rel="noreferrer" className="block py-3 text-white/70 hover:text-white">Applied AI Consulting Group on LinkedIn</a>
-          <a href={site.linkedinMark} target="_blank" rel="noreferrer" className="block py-3 text-white/70 hover:text-white">Mark Alvarez on LinkedIn</a>
-          <a href="/privacy.html" className="block py-3 text-white/70 hover:text-white">Privacy policy</a>
-        </div>
+        <div className="mt-12 border-t border-white/15 pt-6 text-[13px] text-white/50">© {new Date().getFullYear()} Applied AI Consulting Group. All rights reserved.</div>
       </div>
-      <div className="container-x mt-10 border-t border-white/10 pt-6 text-xs text-white/50">© {new Date().getFullYear()} Applied AI Consulting Group. All rights reserved.</div>
     </footer>
   );
 }
