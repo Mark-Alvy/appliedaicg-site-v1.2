@@ -34,12 +34,12 @@ const floaters = (list: Fl[]) =>
   ));
 
 const heroFl: Fl[] = [
-  { t: "cube", s: 40, p: "left-[5%] top-[6px]", k: 1, d: 0, du: 3.5, o: 0.75, sm: true, u: true },
-  { t: "ball", s: 30, p: "left-[17%] top-[40px]", k: 2, d: 1, du: 4.2, o: 0.7, sm: true, u: true },
-  { t: "orange", s: 40, p: "right-[5%] top-[6px]", k: 3, d: 0.7, du: 4.8, o: 0.8, sm: true, u: true },
-  { t: "cube", s: 30, p: "right-[17%] top-[40px]", k: 4, d: 1.5, du: 3.8, o: 0.65, sm: true, u: true },
-  { t: "orange", s: 30, p: "bottom-[0px] left-[8%]", k: 5, d: 2, du: 4.5, o: 0.7, sm: true, u: true },
-  { t: "ball", s: 30, p: "bottom-[0px] right-[9%]", k: 6, d: 0.3, du: 3.2, o: 0.75, sm: true, u: true },
+  { t: "cube", s: 38, p: "left-[3%] top-[14px]", k: 1, d: 0.4, du: 3.3, o: 0.75, sm: true, u: true },
+  { t: "ball", s: 26, p: "left-[22%] top-[47px]", k: 4, d: 2.7, du: 5.1, o: 0.7, sm: true, u: true },
+  { t: "orange", s: 42, p: "right-[12%] top-[3px]", k: 6, d: 1.1, du: 4, o: 0.8, sm: true, u: true },
+  { t: "cube", s: 28, p: "right-[1%] top-[46px]", k: 2, d: 3.9, du: 5.7, o: 0.65, sm: true, u: true },
+  { t: "orange", s: 30, p: "bottom-[1px] left-[29%]", k: 5, d: 0.9, du: 3.7, o: 0.7, sm: true, u: true },
+  { t: "ball", s: 34, p: "bottom-[0px] right-[5%]", k: 3, d: 2.2, du: 4.6, o: 0.75, sm: true, u: true },
 ];
 const strategyFl: Fl[] = [
   { t: "orange", s: 34, p: "left-[2%] top-[8%]", k: 4, d: 1 },
@@ -107,7 +107,7 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="top" className="surface-soft relative flex items-center justify-center overflow-hidden pb-2 pt-5 lg:pb-3 lg:pt-6">
+    <section id="top" className="surface-soft relative flex items-center justify-center overflow-hidden pb-6 pt-5 lg:pb-8 lg:pt-6">
       <div className="container-x relative grid items-center gap-8 lg:grid-cols-2">
         <div className="anim-slide-left space-y-6 text-center lg:text-left">
           <div className="space-y-3">
