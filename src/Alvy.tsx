@@ -69,7 +69,7 @@ export default function Alvy() {
       <div className="container-x relative max-w-4xl text-center">
         <Orb />
         <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl md:text-5xl">
-          Hi, I'm <span className="grad-text-alvy">Alvy</span>
+          <span className="grad-text-alvy">Hi, I'm Alvy</span>
         </h2>
         <p className="mt-3 text-base text-slate sm:text-lg">Your AI assistant for scheduling free strategy sessions</p>
 
@@ -155,7 +155,7 @@ export default function Alvy() {
         <div className="card mx-auto mt-8 max-w-2xl text-left">
           <h3 className="text-lg font-bold text-navy">{contact.bookHeading}</h3>
           <p className="mt-1 text-sm text-slate">{contact.bookSub}</p>
-          <iframe src={site.bookingUrl} title="Book a 30 minute call with Mark Alvarez" className="mt-4 h-[600px] w-full rounded-xl border border-line bg-white" loading="lazy" />
+          <a href={site.bookingUrl} target="_blank" rel="noreferrer" className="btn-primary mt-4 w-full sm:w-auto">Pick a time on the calendar →</a>
         </div>
       </div>
     </section>

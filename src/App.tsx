@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 import { site, nav, hero, imperative, services, approach, process, growth, testimonials, faq, footer } from "./content";
 
 // Flip to true once Nina Flax, Nicole Ornelas, and Tony Bridwell have signed off on their quotes.
-const SHOW_PENDING_TESTIMONIALS = false;
+const SHOW_PENDING_TESTIMONIALS = true;
 
 const clientLogo: Record<string, string> = {
   "Timo Nentwich": img.clientLogos.siemens,
@@ -18,17 +18,6 @@ const clientLogo: Record<string, string> = {
 const badge = ["bg-blue", "bg-purple", "bg-mint"];
 const tileGrad = ["from-blue to-violet", "from-purple to-pink", "from-blue-deep to-blue", "from-violet to-purple"];
 
-function Floaters({ className = "" }: { className?: string }) {
-  return (
-    <div className={"pointer-events-none absolute inset-0 hidden md:block " + className} aria-hidden>
-      <img src={img.cubeBlue} alt="" className="anim-orbit absolute left-[5%] top-[14%] w-9" />
-      <img src={img.ballPink} alt="" className="anim-orbit-rev absolute right-[8%] top-[20%] w-7" />
-      <img src={img.cubeOrange} alt="" className="anim-float absolute bottom-[16%] right-[18%] w-10 [animation-delay:1.5s]" />
-      <img src={img.cubeBlue} alt="" className="anim-float absolute bottom-[22%] left-[12%] w-7 [animation-delay:2.5s]" />
-    </div>
-  );
-}
-
 function Header() {
   const [open, setOpen] = useState(false);
   return (
@@ -39,12 +28,13 @@ function Header() {
           <span className="text-sm font-bold tracking-tight text-navy sm:text-base">{site.name}</span>
         </a>
         <nav className="hidden items-center gap-6 lg:flex">
-          {nav.map((n) => (
-            <a key={n.href} href={n.href} className="text-sm font-medium text-slate transition hover:text-blue">{n.label}</a>
+          {nav.slice(0, 3).map((n) => (
+            <a key={n.href} href={n.href} className="text-sm font-medium text-ink transition hover:text-blue">{n.label}</a>
           ))}
-          <a href={site.linkedinCompany} target="_blank" rel="noreferrer" className="text-sm font-medium text-slate transition hover:text-blue">LinkedIn</a>
-          <a href="#contact" className="grad-text-alvy text-sm font-semibold">Ask Alvy</a>
-          <a href="#contact" className="btn-primary px-5 py-2.5">Book a call</a>
+          <a href={site.linkedinCompany} target="_blank" rel="noreferrer" className="text-sm font-medium text-ink transition hover:text-blue">LinkedIn</a>
+          <a href="#contact" className="text-sm font-medium text-ink transition hover:text-blue">Contact</a>
+          <a href="#contact" className="text-sm font-semibold" style={{ background: "linear-gradient(90deg,#3b82f6,#d946ef,#f472b6)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>Ask Alvy</a>
+          <a href="#contact" className="rounded-full bg-blue px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-blue-deep">Request a Call</a>
         </nav>
         <button className="rounded-md p-2 text-navy lg:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(!open)}>
           {open
@@ -59,8 +49,8 @@ function Header() {
               <a key={n.href} href={n.href} onClick={() => setOpen(false)} className="rounded-lg px-3 py-3 text-base font-medium text-navy hover:bg-mist">{n.label}</a>
             ))}
             <a href={site.linkedinCompany} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="rounded-lg px-3 py-3 text-base font-medium text-navy hover:bg-mist">LinkedIn</a>
-            <a href="#contact" onClick={() => setOpen(false)} className="grad-text-alvy rounded-lg px-3 py-3 text-base font-semibold">Ask Alvy</a>
-            <a href="#contact" onClick={() => setOpen(false)} className="btn-primary mt-2 w-full">Book a call</a>
+            <a href="#contact" onClick={() => setOpen(false)} className="rounded-lg px-3 py-3 text-base font-semibold" style={{ background: "linear-gradient(90deg,#3b82f6,#d946ef,#f472b6)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>Ask Alvy</a>
+            <a href="#contact" onClick={() => setOpen(false)} className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-blue px-5 py-3 text-sm font-semibold text-white">Request a Call</a>
           </div>
         </div>
       )}
@@ -70,10 +60,7 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="top" className="hero-bg relative overflow-hidden">
-      <div className="ring-orb left-[-10%] top-[10%] h-72 w-72 bg-violet" />
-      <div className="ring-orb bottom-[-10%] right-[5%] h-80 w-80 bg-blue" />
-      <Floaters />
+    <section id="top" className="surface-soft relative overflow-hidden">
       <div className="container-x relative grid items-center gap-10 py-14 md:grid-cols-12 md:py-24">
         <div className="anim-rise text-center md:col-span-6 md:text-left">
           <h1 className="text-4xl font-extrabold leading-[1.08] tracking-tight text-navy sm:text-5xl lg:text-6xl">
@@ -90,7 +77,9 @@ function Hero() {
         </div>
         <div className="relative md:col-span-6">
           <img src={img.heroIllustration} alt="Isometric illustration of connected AI systems" width={768} height={600} className="anim-float relative z-10 mx-auto w-full max-w-md md:max-w-xl" />
-          <img src={img.floatingAi} alt="" className="anim-float absolute -bottom-4 left-0 hidden w-32 md:block md:-left-6 [animation-delay:1s]" aria-hidden />
+          <img src={img.cubeBlue} alt="" className="anim-orbit absolute left-[4%] top-[8%] hidden w-9 md:block" aria-hidden />
+          <img src={img.ballPink} alt="" className="anim-orbit-rev absolute right-[6%] top-[14%] hidden w-7 md:block" aria-hidden />
+          <img src={img.cubeOrange} alt="" className="anim-float absolute bottom-[10%] right-[4%] hidden w-10 md:block [animation-delay:1.5s]" aria-hidden />
         </div>
       </div>
     </section>
@@ -125,7 +114,6 @@ function Imperative() {
           <p className="mt-6 text-base leading-relaxed text-slate sm:text-lg md:text-xl">{imperative.p2}</p>
         </Reveal>
         <Reveal dir="right" className="relative md:col-span-5">
-          <div className="ring-orb right-[-20%] top-[10%] h-64 w-64 bg-violet" />
           <img src={img.strategyIllustration} alt="Illustration of strategic AI transformation" width={932} height={890} className="anim-float relative mx-auto w-full max-w-sm md:max-w-md" />
         </Reveal>
       </div>
@@ -136,7 +124,6 @@ function Imperative() {
 function Services() {
   return (
     <section id="services" className="surface-soft relative overflow-hidden py-16 md:py-28">
-      <Floaters className="opacity-70" />
       <div className="container-x relative text-center">
         <Reveal>
           <span className="eyebrow">{services.eyebrow}</span>
@@ -145,9 +132,9 @@ function Services() {
         </Reveal>
         <div className="mt-12 grid gap-6 text-left md:grid-cols-3">
           {services.cards.map((c, i) => (
-            <Reveal key={c.title} delay={i * 120} className="h-full">
-              <article className="card flex h-full flex-col">
-                <div className={"flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-white " + badge[i]}>{i + 1}</div>
+            <Reveal key={c.title} delay={i * 160} className="h-full">
+              <article className="card group flex h-full flex-col hover:-translate-y-2 hover:border-blue/40">
+                <div className={"flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-white shadow-md transition duration-300 group-hover:scale-110 group-hover:rotate-6 " + badge[i]}>{i + 1}</div>
                 <p className="mt-6 text-xs font-semibold tracking-widest text-slate">{c.tag}</p>
                 <h3 className="mt-2 text-xl font-bold text-navy">{c.title}</h3>
                 <p className="mt-2 text-sm font-semibold text-navy">What?</p>
@@ -183,14 +170,12 @@ function Approach() {
           </div>
         </Reveal>
         <Reveal dir="right" className="relative mx-auto md:col-span-5">
-          <div className="ring-orb left-[-15%] top-[20%] h-72 w-72 bg-blue" />
-          <div className="relative">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue/20 via-violet/20 to-pink/20 blur-xl" />
-            <img src={img.mark} alt="Mark Alvarez, Founder and Principal Consultant" width={640} height={773} className="relative aspect-square w-64 rounded-full object-cover object-top shadow-2xl ring-4 ring-white sm:w-72 md:w-80" />
-            <img src={img.cubeBlue} alt="" className="anim-orbit absolute -left-3 top-6 w-9" aria-hidden />
-            <img src={img.ballPink} alt="" className="anim-orbit-rev absolute -right-2 bottom-12 w-7" aria-hidden />
-            <img src={img.cubeOrange} alt="" className="anim-float absolute -bottom-3 left-10 w-10 [animation-delay:2s]" aria-hidden />
-            <img src={img.floatingAi} alt="" className="anim-float absolute -right-10 -top-6 hidden w-28 sm:block [animation-delay:1s]" aria-hidden />
+          <div className="relative p-6">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-50 to-purple-50" />
+            <img src={img.mark} alt="Mark Alvarez, Founder and Principal Consultant" width={640} height={773} className="relative aspect-square w-60 rounded-full object-cover object-top shadow-xl ring-4 ring-white sm:w-72 md:w-80" />
+            <img src={img.cubeBlue} alt="" className="anim-orbit absolute left-0 top-10 w-9" aria-hidden />
+            <img src={img.ballPink} alt="" className="anim-orbit-rev absolute right-2 top-16 w-6" aria-hidden />
+            <img src={img.cubeOrange} alt="" className="anim-float absolute bottom-8 right-4 w-9 [animation-delay:2s]" aria-hidden />
           </div>
         </Reveal>
       </div>
@@ -219,9 +204,6 @@ function Process() {
             ))}
           </div>
         </Reveal>
-        <Reveal className="mt-12">
-          <img src={img.processIllustration} alt="Illustration of the AI implementation process" width={827} height={662} className="anim-float mx-auto w-full max-w-sm md:max-w-lg" />
-        </Reveal>
       </div>
     </section>
   );
@@ -230,7 +212,6 @@ function Process() {
 function Growth() {
   return (
     <section className="relative overflow-hidden py-16 md:py-28">
-      <Floaters className="opacity-60" />
       <div className="container-x relative grid items-center gap-12 md:grid-cols-12">
         <Reveal dir="left" className="md:col-span-7">
           <span className="eyebrow">{growth.eyebrow}</span>
@@ -250,8 +231,9 @@ function Growth() {
           </ol>
         </Reveal>
         <Reveal dir="right" className="relative md:col-span-5">
-          <div className="ring-orb right-[-10%] top-[0%] h-72 w-72 bg-violet" />
-          <img src={img.growthIllustration} alt="Isometric illustration of a team building AI workflows" width={927} height={829} className="anim-float relative mx-auto w-full max-w-sm md:max-w-md" />
+          <img src={img.processIllustration} alt="Isometric illustration of a team building an AI workflow" width={827} height={662} className="anim-float relative mx-auto w-full max-w-xs md:max-w-sm" />
+          <img src={img.cubeBlue} alt="" className="anim-orbit absolute left-[6%] top-[12%] hidden w-8 md:block" aria-hidden />
+          <img src={img.cubeOrange} alt="" className="anim-float absolute bottom-[14%] right-[8%] hidden w-9 md:block" aria-hidden />
         </Reveal>
       </div>
     </section>
@@ -267,7 +249,7 @@ function Testimonials() {
           <span className="eyebrow">{testimonials.eyebrow}</span>
           <h2 className="h2">What leaders say <span className="grad-text">after the work is done</span></h2>
         </Reveal>
-        <div className="mt-12 grid gap-6 text-left md:grid-cols-3">
+        <div className="mt-12 grid gap-6 text-left sm:grid-cols-2 md:grid-cols-3">
           {items.map((t, i) => (
             <Reveal key={t.name} delay={i * 120} className="h-full">
               <figure className="card flex h-full flex-col">
@@ -311,26 +293,26 @@ function Faq() {
 
 function Footer() {
   return (
-    <footer className="relative border-t border-line bg-white py-14">
+    <footer className="relative bg-navy py-14 text-white">
       <div className="grad-live absolute inset-x-0 top-0 h-1" aria-hidden />
       <div className="container-x grid gap-10 md:grid-cols-3">
         <div>
-          <img src={img.logoMark} alt="Applied AI Consulting Group" className="h-16 w-auto" />
-          <p className="mt-4 max-w-xs text-sm text-slate">{footer.tagline}</p>
+          <img src={img.logoMark} alt="Applied AI Consulting Group" className="h-16 w-auto rounded-lg bg-white p-2" />
+          <p className="mt-4 max-w-xs text-sm text-white/70">{footer.tagline}</p>
         </div>
         <div className="text-sm">
-          <p className="font-semibold text-navy">Let's connect</p>
-          <a href={`mailto:${site.email}`} className="mt-2 block text-slate hover:text-blue">{site.email}</a>
-          <p className="mt-2 text-slate">{footer.location}</p>
+          <p className="font-semibold">Let's connect</p>
+          <a href={`mailto:${site.email}`} className="mt-2 block text-white/70 hover:text-white">{site.email}</a>
+          <p className="mt-2 text-white/70">{footer.location}</p>
         </div>
         <div className="text-sm">
-          <p className="font-semibold text-navy">Links</p>
-          <a href={site.linkedinCompany} target="_blank" rel="noreferrer" className="mt-2 block text-slate hover:text-blue">Applied AI Consulting Group on LinkedIn</a>
-          <a href={site.linkedinMark} target="_blank" rel="noreferrer" className="mt-2 block text-slate hover:text-blue">Mark Alvarez on LinkedIn</a>
-          <a href="/privacy.html" className="mt-2 block text-slate hover:text-blue">Privacy policy</a>
+          <p className="font-semibold">Links</p>
+          <a href={site.linkedinCompany} target="_blank" rel="noreferrer" className="mt-2 block text-white/70 hover:text-white">Applied AI Consulting Group on LinkedIn</a>
+          <a href={site.linkedinMark} target="_blank" rel="noreferrer" className="mt-2 block text-white/70 hover:text-white">Mark Alvarez on LinkedIn</a>
+          <a href="/privacy.html" className="mt-2 block text-white/70 hover:text-white">Privacy policy</a>
         </div>
       </div>
-      <div className="container-x mt-10 border-t border-line pt-6 text-xs text-slate">© {new Date().getFullYear()} Applied AI Consulting Group. All rights reserved.</div>
+      <div className="container-x mt-10 border-t border-white/10 pt-6 text-xs text-white/50">© {new Date().getFullYear()} Applied AI Consulting Group. All rights reserved.</div>
     </footer>
   );
 }

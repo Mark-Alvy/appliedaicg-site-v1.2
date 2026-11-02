@@ -8,10 +8,10 @@ export const site = {
 };
 
 export const nav = [
-  { label: "Approach", href: "#approach" },
+  { label: "About Us", href: "#approach" },
   { label: "Services", href: "#services" },
   { label: "Process", href: "#process" },
-  { label: "Results", href: "#results" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export const hero = {
