@@ -1,26 +1,56 @@
 import { useState } from "react";
-import HeroArt from "./HeroArt";
-import { site, nav, hero, imperative, services, approach, process, growth, contact, testimonials, faq, footer } from "./content";
+import { img } from "./assets";
+import Alvy from "./Alvy";
+import { site, nav, hero, imperative, services, approach, process, growth, testimonials, faq, footer } from "./content";
 
 // Flip to true once Nina Flax, Nicole Ornelas, and Tony Bridwell have signed off on their quotes.
 const SHOW_PENDING_TESTIMONIALS = false;
 
+const headshot: Record<string, string> = {
+  "Timo Nentwich": img.headshots.timo,
+  "Catherine McNealy": img.headshots.catherine,
+  "Tyler Woychyshyn": img.headshots.tyler,
+};
+const clientLogo: Record<string, string> = {
+  "Timo Nentwich": img.clientLogos.siemens,
+  "Catherine McNealy": img.clientLogos.ccs,
+  "Tyler Woychyshyn": img.clientLogos.preparedHero,
+};
+const badge = ["bg-blue", "bg-purple", "bg-mint"];
+const tileGrad = [
+  "from-blue to-violet",
+  "from-purple to-pink",
+  "from-blue-deep to-blue",
+  "from-violet to-purple",
+];
+
+function Floaters({ className = "" }: { className?: string }) {
+  return (
+    <div className={"pointer-events-none absolute inset-0 " + className} aria-hidden>
+      <img src={img.cubeBlue} alt="" className="anim-float absolute left-[6%] top-[12%] w-9" />
+      <img src={img.ballPink} alt="" className="anim-float-slow absolute right-[10%] top-[18%] w-7" />
+      <img src={img.cubeOrange} alt="" className="anim-float absolute bottom-[14%] right-[22%] w-10 [animation-delay:1.5s]" />
+    </div>
+  );
+}
+
 function Header() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-line/70 bg-white/85 backdrop-blur">
       <div className="container-x flex h-16 items-center justify-between">
         <a href="#top" className="flex items-center gap-3">
           <img src="/mark.png" alt="" className="h-9 w-auto" />
           <span className="text-base font-bold tracking-tight text-navy">{site.name}</span>
         </a>
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-7 md:flex">
           {nav.map((n) => (
-            <a key={n.href} href={n.href} className="text-sm font-medium text-slate hover:text-navy">{n.label}</a>
+            <a key={n.href} href={n.href} className="text-sm font-medium text-slate transition hover:text-blue">{n.label}</a>
           ))}
-          <a href="#contact" className="btn-primary px-5 py-2">Book a call</a>
+          <a href="#contact" className="text-sm font-semibold text-blue">Ask Alvy</a>
+          <a href="#contact" className="btn-primary px-5 py-2.5">Book a call</a>
         </nav>
-        <button className="md:hidden rounded-md p-2 text-navy" aria-label="Open menu" onClick={() => setOpen(!open)}>
+        <button className="rounded-md p-2 text-navy md:hidden" aria-label="Open menu" onClick={() => setOpen(!open)}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
         </button>
       </div>
@@ -40,20 +70,43 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="top" className="bg-gradient-to-b from-mist to-white">
-      <div className="container-x grid items-center gap-12 py-16 md:grid-cols-2 md:py-24">
-        <div>
-          <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-navy sm:text-5xl lg:text-6xl">
-            {hero.lines[0]}<br />{hero.lines[1]}<br /><span className="text-brand">{hero.lines[2]}</span>
+    <section id="top" className="hero-bg relative overflow-hidden">
+      <div className="ring-orb left-[-10%] top-[10%] h-72 w-72 bg-violet" />
+      <div className="ring-orb bottom-[-10%] right-[5%] h-80 w-80 bg-blue" />
+      <Floaters />
+      <div className="container-x relative grid items-center gap-10 py-16 md:grid-cols-12 md:py-24">
+        <div className="anim-rise md:col-span-6">
+          <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight text-navy sm:text-5xl lg:text-6xl">
+            {hero.lines[0]}<br />
+            <span className="grad-text">{hero.lines[1]}</span><br />
+            {hero.lines[2]}
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-slate">{hero.sub}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <p className="mt-7 max-w-xl text-lg leading-relaxed text-slate">{hero.sub}</p>
+          <div className="mt-9 flex flex-wrap items-center gap-3">
             <a href="#contact" className="btn-primary">{hero.primary}</a>
             <a href="#process" className="btn-ghost">{hero.secondary} →</a>
           </div>
-          <p className="mt-10 max-w-xl text-sm text-slate">{hero.trust}</p>
+          <p className="mt-10 max-w-xl text-sm leading-relaxed text-slate">{hero.trust}</p>
         </div>
-        <div className="md:pl-6"><HeroArt /></div>
+        <div className="relative md:col-span-6">
+          <img src={img.heroIllustration} alt="Isometric illustration of connected AI systems" className="anim-float relative z-10 mx-auto w-full max-w-xl drop-shadow-2xl" />
+          <img src={img.floatingAi} alt="" className="anim-float-slow absolute -bottom-6 left-0 w-36 opacity-90 md:-left-8" aria-hidden />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Platforms() {
+  return (
+    <section className="border-y border-line bg-white py-8">
+      <div className="container-x">
+        <p className="text-center text-xs font-semibold tracking-widest text-slate">BUILT ON THE PLATFORMS YOU ALREADY RUN</p>
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-5 opacity-80 grayscale transition hover:grayscale-0">
+          {img.platforms.map((p) => (
+            <img key={p.name} src={p.src} alt={p.name} title={p.name} className="h-8 w-auto object-contain" />
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -61,11 +114,20 @@ function Hero() {
 
 function Imperative() {
   return (
-    <section id="approach" className="py-20">
-      <div className="container-x max-w-3xl">
-        <span className="eyebrow">{imperative.eyebrow}</span>
-        <p className="mt-6 text-xl leading-relaxed text-ink"><span className="font-semibold text-brand-deep">Most companies now own more AI than they use.</span> {imperative.p1.replace("Most companies now own more AI than they use. ", "")}</p>
-        <p className="mt-6 text-xl leading-relaxed text-ink">{imperative.p2}</p>
+    <section id="approach" className="relative overflow-hidden py-20 md:py-28">
+      <div className="container-x grid items-center gap-12 md:grid-cols-12">
+        <div className="md:col-span-7">
+          <span className="eyebrow">{imperative.eyebrow}</span>
+          <p className="mt-7 text-xl leading-relaxed text-ink md:text-2xl">
+            <span className="font-semibold text-purple">Most companies now own more AI than they use.</span>{" "}
+            {imperative.p1.replace("Most companies now own more AI than they use. ", "")}
+          </p>
+          <p className="mt-6 text-lg leading-relaxed text-slate md:text-xl">{imperative.p2}</p>
+        </div>
+        <div className="relative md:col-span-5">
+          <div className="ring-orb right-[-20%] top-[10%] h-64 w-64 bg-violet" />
+          <img src={img.strategyIllustration} alt="Illustration of strategic AI transformation" className="anim-float relative mx-auto w-full max-w-md" />
+        </div>
       </div>
     </section>
   );
@@ -73,21 +135,22 @@ function Imperative() {
 
 function Services() {
   return (
-    <section id="services" className="bg-mist py-20">
-      <div className="container-x">
+    <section id="services" className="surface-soft relative overflow-hidden py-20 md:py-28">
+      <Floaters className="opacity-70" />
+      <div className="container-x relative text-center">
         <span className="eyebrow">{services.eyebrow}</span>
-        <h2 className="h2 text-navy">{services.heading}</h2>
-        <p className="lead">{services.intro}</p>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <h2 className="h2">Three layers of <span className="grad-text">one system</span></h2>
+        <p className="lead mx-auto">{services.intro}</p>
+        <div className="mt-14 grid gap-6 text-left md:grid-cols-3">
           {services.cards.map((c, i) => (
             <article key={c.title} className="card flex flex-col">
-              <div className="flex items-center gap-3">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-navy text-sm font-bold text-white">{i + 1}</span>
-                <span className="text-xs font-semibold tracking-widest text-brand-deep">{c.tag}</span>
-              </div>
-              <h3 className="mt-5 text-xl font-bold text-navy">{c.title}</h3>
-              <p className="mt-3 text-slate">{c.what}</p>
-              <p className="mt-5 text-sm text-slate"><span className="font-semibold text-navy">Ideal for: </span>{c.ideal}</p>
+              <div className={"flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-white " + badge[i]}>{i + 1}</div>
+              <p className="mt-6 text-xs font-semibold tracking-widest text-slate">{c.tag}</p>
+              <h3 className="mt-2 text-xl font-bold text-navy">{c.title}</h3>
+              <p className="mt-2 text-sm font-semibold text-navy">What?</p>
+              <p className="mt-1 text-slate">{c.what}</p>
+              <p className="mt-4 text-sm font-semibold text-navy">Ideal for:</p>
+              <p className="mt-1 text-slate">{c.ideal}</p>
             </article>
           ))}
         </div>
@@ -98,24 +161,33 @@ function Services() {
 
 function Approach() {
   return (
-    <section className="py-20">
-      <div className="container-x grid gap-12 md:grid-cols-5">
-        <div className="md:col-span-3">
+    <section className="relative overflow-hidden py-20 md:py-28">
+      <div className="container-x grid items-center gap-12 md:grid-cols-12">
+        <div className="md:col-span-7">
           <span className="eyebrow">{approach.eyebrow}</span>
-          <h2 className="h2 text-navy">{approach.heading}</h2>
+          <h2 className="h2">Practical, measured, <span className="grad-text">built to be owned by you</span></h2>
           <p className="lead">{approach.body}</p>
-          <div id="results" className="mt-10 rounded-2xl border border-line bg-mist p-6">
-            <span className="text-xs font-semibold tracking-widest text-brand-deep">{approach.resultsEyebrow}</span>
+          <div id="results" className="mt-8 rounded-2xl border border-blue-100 bg-blue-50/60 p-6">
+            <span className="text-xs font-semibold tracking-widest text-blue-deep">{approach.resultsEyebrow}</span>
             <p className="mt-2 text-lg font-medium text-navy">{approach.results}</p>
           </div>
+          <div className="mt-8">
+            <h3 className="text-xl font-bold text-navy">{approach.bioTitle}</h3>
+            <p className="text-sm font-semibold text-purple">{approach.bioRole}</p>
+            <p className="mt-3 text-slate">{approach.bio}</p>
+            <a href={site.linkedinMark} className="mt-4 inline-block text-sm font-semibold text-blue hover:underline" target="_blank" rel="noreferrer">Connect with Mark on LinkedIn →</a>
+          </div>
         </div>
-        <aside className="card md:col-span-2 self-start">
-          <p className="text-xs font-semibold tracking-widest text-brand-deep">LED BY</p>
-          <h3 className="mt-2 text-2xl font-bold text-navy">{approach.bioTitle}</h3>
-          <p className="text-sm font-medium text-slate">{approach.bioRole}</p>
-          <p className="mt-4 text-sm leading-relaxed text-slate">{approach.bio}</p>
-          <a href={site.linkedinMark} className="mt-5 inline-block text-sm font-semibold text-brand hover:underline" target="_blank" rel="noreferrer">Connect on LinkedIn →</a>
-        </aside>
+        <div className="relative mx-auto md:col-span-5">
+          <div className="ring-orb left-[-15%] top-[20%] h-72 w-72 bg-blue" />
+          <div className="relative">
+            <div className="grad-live absolute inset-0 rounded-full blur-md" />
+            <img src={img.mark} alt="Mark Alvarez, Founder and Principal Consultant" className="relative m-2 aspect-square w-72 rounded-full object-cover object-top shadow-2xl md:w-80" />
+            <img src={img.cubeBlue} alt="" className="anim-float absolute -left-4 top-6 w-10" aria-hidden />
+            <img src={img.ballPink} alt="" className="anim-float-slow absolute -right-2 bottom-12 w-7" aria-hidden />
+            <img src={img.cubeOrange} alt="" className="anim-float absolute -bottom-4 left-10 w-11 [animation-delay:2s]" aria-hidden />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -123,20 +195,21 @@ function Approach() {
 
 function Process() {
   return (
-    <section id="process" className="bg-navy py-20 text-white">
-      <div className="container-x">
-        <span className="eyebrow bg-white/10 text-white">{process.eyebrow}</span>
-        <h2 className="h2 text-white">{process.heading}</h2>
-        <p className="lead text-white/75">{process.intro}</p>
-        <div className="mt-12 grid gap-6 md:grid-cols-4">
-          {process.steps.map((s) => (
-            <div key={s.title} className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="text-3xl font-extrabold text-brand">{s.n}</div>
-              <h3 className="mt-3 text-xl font-bold">{s.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/75">{s.body}</p>
+    <section id="process" className="surface-soft relative overflow-hidden py-20 md:py-28">
+      <div className="container-x text-center">
+        <span className="eyebrow">{process.eyebrow}</span>
+        <h2 className="h2">The <span className="grad-text">4D Framework</span>: from workflow to operating capability</h2>
+        <p className="lead mx-auto">{process.intro}</p>
+        <div className="mt-14 grid gap-6 md:grid-cols-4">
+          {process.steps.map((s, i) => (
+            <div key={s.title} className="card text-center">
+              <div className={"tile mx-auto bg-gradient-to-br " + tileGrad[i]}>{s.n}</div>
+              <h3 className="mt-5 text-xl font-bold text-navy">{s.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate">{s.body}</p>
             </div>
           ))}
         </div>
+        <img src={img.processIllustration} alt="Illustration of the AI implementation process" className="mx-auto mt-14 w-full max-w-2xl" />
       </div>
     </section>
   );
@@ -144,62 +217,30 @@ function Process() {
 
 function Growth() {
   return (
-    <section className="py-20">
-      <div className="container-x">
-        <span className="eyebrow">{growth.eyebrow}</span>
-        <h2 className="h2 text-navy">{growth.heading}</h2>
-        <p className="lead">{growth.intro}</p>
-        <ol className="mt-12 grid gap-6 md:grid-cols-3">
-          {growth.steps.map((s, i) => (
-            <li key={s.title} className="card">
-              <span className="text-xs font-semibold tracking-widest text-brand-deep">STEP {i + 1}</span>
-              <h3 className="mt-3 text-xl font-bold text-navy">{s.title}</h3>
-              <p className="mt-3 text-slate">{s.body}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  );
-}
-
-function Contact() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setStatus("sending");
-    const data = new FormData(e.currentTarget);
-    try {
-      const r = await fetch(site.formspree, { method: "POST", body: data, headers: { Accept: "application/json" } });
-      setStatus(r.ok ? "sent" : "error");
-    } catch {
-      setStatus("error");
-    }
-  }
-  return (
-    <section id="contact" className="bg-mist py-20">
-      <div className="container-x grid gap-10 md:grid-cols-2">
-        <div className="card">
-          <h2 className="text-2xl font-bold text-navy">{contact.bookHeading}</h2>
-          <p className="mt-2 text-slate">{contact.bookSub}</p>
-          <div className="mt-6 flex min-h-64 items-center justify-center rounded-xl border border-dashed border-line bg-mist text-sm text-slate">
-            Calendar booking embed goes here (Google Workspace appointment schedule).
-          </div>
+    <section className="relative overflow-hidden py-20 md:py-28">
+      <Floaters className="opacity-60" />
+      <div className="container-x relative grid items-center gap-12 md:grid-cols-12">
+        <div className="md:col-span-7">
+          <span className="eyebrow">{growth.eyebrow}</span>
+          <h2 className="h2">From first call to <span className="grad-text">running agent</span></h2>
+          <p className="lead">{growth.intro}</p>
+          <ol className="mt-10 space-y-5">
+            {growth.steps.map((s, i) => (
+              <li key={s.title} className="card flex gap-5 p-6">
+                <div className={"tile shrink-0 bg-gradient-to-br " + tileGrad[i]}>{i + 1}</div>
+                <div>
+                  <p className="text-xs font-semibold tracking-widest text-slate">STEP {i + 1}</p>
+                  <h3 className="mt-1 text-lg font-bold text-navy">{s.title}</h3>
+                  <p className="mt-2 text-slate">{s.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
-        <form onSubmit={onSubmit} className="card">
-          <h2 className="text-2xl font-bold text-navy">{contact.formHeading}</h2>
-          <p className="mt-2 text-slate">{contact.formSub}</p>
-          <div className="mt-6 grid gap-4">
-            <input name="name" required placeholder="Full name" className="rounded-lg border border-line px-4 py-3 text-sm outline-none focus:border-brand" />
-            <input name="email" type="email" required placeholder="Work email" className="rounded-lg border border-line px-4 py-3 text-sm outline-none focus:border-brand" />
-            <input name="company" placeholder="Company" className="rounded-lg border border-line px-4 py-3 text-sm outline-none focus:border-brand" />
-            <textarea name="message" required rows={4} placeholder="What are you trying to get done?" className="rounded-lg border border-line px-4 py-3 text-sm outline-none focus:border-brand" />
-            <button type="submit" disabled={status === "sending" || status === "sent"} className="btn-primary disabled:opacity-60">
-              {status === "sent" ? "Sent" : status === "sending" ? "Sending" : "Send"}
-            </button>
-            {status === "error" && <p className="text-sm text-red-600">Something went wrong. Email us at {site.email}.</p>}
-          </div>
-        </form>
+        <div className="relative md:col-span-5">
+          <div className="ring-orb right-[-10%] top-[0%] h-72 w-72 bg-pink" />
+          <img src={img.aiGif} alt="Animated AI illustration" className="relative mx-auto w-64 rounded-3xl shadow-2xl md:w-72" />
+        </div>
       </div>
     </section>
   );
@@ -208,17 +249,21 @@ function Contact() {
 function Testimonials() {
   const items = testimonials.items.filter((t) => SHOW_PENDING_TESTIMONIALS || !t.pending);
   return (
-    <section className="py-20">
-      <div className="container-x">
+    <section className="py-20 md:py-28">
+      <div className="container-x text-center">
         <span className="eyebrow">{testimonials.eyebrow}</span>
-        <h2 className="h2 text-navy">{testimonials.heading}</h2>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <h2 className="h2">What leaders say <span className="grad-text">after the work is done</span></h2>
+        <div className="mt-14 grid gap-6 text-left md:grid-cols-3">
           {items.map((t) => (
             <figure key={t.name} className="card flex flex-col">
-              <blockquote className="flex-1 text-slate">“{t.quote}”</blockquote>
-              <figcaption className="mt-6">
-                <div className="font-semibold text-navy">{t.name}</div>
-                <div className="text-sm text-slate">{t.title}</div>
+              {clientLogo[t.name] && <img src={clientLogo[t.name]} alt="" className="mb-5 h-8 w-auto self-start object-contain" />}
+              <blockquote className="flex-1 leading-relaxed text-slate">“{t.quote}”</blockquote>
+              <figcaption className="mt-6 flex items-center gap-3">
+                {headshot[t.name] && <img src={headshot[t.name]} alt="" className="h-12 w-12 rounded-full object-cover ring-2 ring-blue/20" />}
+                <div>
+                  <div className="font-semibold text-navy">{t.name}</div>
+                  <div className="text-sm text-slate">{t.title}</div>
+                </div>
               </figcaption>
             </figure>
           ))}
@@ -230,17 +275,17 @@ function Testimonials() {
 
 function Faq() {
   return (
-    <section className="bg-mist py-20">
+    <section className="surface-soft py-20 md:py-28">
       <div className="container-x max-w-3xl">
-        <h2 className="h2 mt-0 text-navy">Frequently asked questions</h2>
-        <div className="mt-8 divide-y divide-line rounded-2xl border border-line bg-white">
+        <h2 className="h2 mt-0 text-center">Frequently asked <span className="grad-text">questions</span></h2>
+        <div className="mt-10 divide-y divide-line rounded-2xl border border-line bg-white shadow-sm">
           {faq.map((f) => (
             <details key={f.q} className="group px-6 py-5">
               <summary className="flex cursor-pointer list-none items-center justify-between font-semibold text-navy">
                 {f.q}
-                <span className="ml-4 text-brand transition group-open:rotate-45">+</span>
+                <span className="ml-4 text-xl text-blue transition group-open:rotate-45">+</span>
               </summary>
-              <p className="mt-3 text-slate">{f.a}</p>
+              <p className="mt-3 leading-relaxed text-slate">{f.a}</p>
             </details>
           ))}
         </div>
@@ -251,25 +296,25 @@ function Faq() {
 
 function Footer() {
   return (
-    <footer className="border-t border-line py-12">
-      <div className="container-x grid gap-8 md:grid-cols-3">
+    <footer className="bg-navy py-14 text-white">
+      <div className="container-x grid gap-10 md:grid-cols-3">
         <div>
-          <img src="/logo.png" alt="Applied AI Consulting Group" className="h-14 w-auto" />
-          <p className="mt-4 max-w-xs text-sm text-slate">{footer.tagline}</p>
+          <img src="/logo.png" alt="Applied AI Consulting Group" className="h-16 w-auto rounded-md bg-white/95 p-2" />
+          <p className="mt-4 max-w-xs text-sm text-white/70">{footer.tagline}</p>
         </div>
         <div className="text-sm">
-          <p className="font-semibold text-navy">Contact</p>
-          <a href={`mailto:${site.email}`} className="mt-2 block text-slate hover:text-navy">{site.email}</a>
-          <p className="mt-2 text-slate">{footer.location}</p>
+          <p className="font-semibold">Let's connect</p>
+          <a href={`mailto:${site.email}`} className="mt-2 block text-white/70 hover:text-white">{site.email}</a>
+          <p className="mt-2 text-white/70">{footer.location}</p>
         </div>
         <div className="text-sm">
-          <p className="font-semibold text-navy">Links</p>
-          <a href={site.linkedinCompany} target="_blank" rel="noreferrer" className="mt-2 block text-slate hover:text-navy">Applied AI Consulting Group on LinkedIn</a>
-          <a href={site.linkedinMark} target="_blank" rel="noreferrer" className="mt-2 block text-slate hover:text-navy">Mark Alvarez on LinkedIn</a>
-          <a href="/privacy.html" className="mt-2 block text-slate hover:text-navy">Privacy policy</a>
+          <p className="font-semibold">Links</p>
+          <a href={site.linkedinCompany} target="_blank" rel="noreferrer" className="mt-2 block text-white/70 hover:text-white">Applied AI Consulting Group on LinkedIn</a>
+          <a href={site.linkedinMark} target="_blank" rel="noreferrer" className="mt-2 block text-white/70 hover:text-white">Mark Alvarez on LinkedIn</a>
+          <a href="/privacy.html" className="mt-2 block text-white/70 hover:text-white">Privacy policy</a>
         </div>
       </div>
-      <div className="container-x mt-10 text-xs text-slate">© {new Date().getFullYear()} Applied AI Consulting Group. All rights reserved.</div>
+      <div className="container-x mt-10 border-t border-white/10 pt-6 text-xs text-white/50">© {new Date().getFullYear()} Applied AI Consulting Group. All rights reserved.</div>
     </footer>
   );
 }
@@ -280,12 +325,13 @@ export default function App() {
       <Header />
       <main>
         <Hero />
+        <Platforms />
         <Imperative />
         <Services />
         <Approach />
         <Process />
         <Growth />
-        <Contact />
+        <Alvy />
         <Testimonials />
         <Faq />
       </main>
