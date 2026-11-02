@@ -362,7 +362,7 @@ function Footer() {
         <div className="grid gap-12 md:grid-cols-3 md:gap-10">
           <div>
             <img src={img.logoMark} alt="Applied AI Consulting Group" className="h-32 w-auto rounded-[10px] bg-white p-3" />
-            <p className="mt-5 max-w-xs text-[15px] text-white/90">Transforming Business with Practical AI Solutions.</p>
+            <p className="mt-4 max-w-xs text-lg font-semibold leading-[1.4] text-white">Transforming Business with <span className="grad-text">Practical AI</span> Solutions.</p>
           </div>
           <div>
             <p className={fHead}>Let's connect</p>

@@ -119,5 +119,5 @@ export const faq = [
 
 export const footer = {
   tagline: "AI operating systems for companies that intend to run on them.",
-  location: "Fort Lauderdale, Florida",
+  location: "Miami, Florida",
 };
