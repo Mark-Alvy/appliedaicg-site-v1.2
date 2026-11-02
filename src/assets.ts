@@ -1,36 +1,34 @@
-// Image assets. These are the same files the current live site serves from imgur.
-// Phase 2 cleanup: download the album, place files under public/img/, and change the base.
-const base = "https://i.imgur.com/";
+// Image assets, served from /public/img. Source of truth: Drive, 00-AppliedAI/Company/website/site-assets.
+const base = "/img/";
 
 export const img = {
-  heroIllustration: base + "u8HJ9F0.png",
-  strategyIllustration: base + "SVKyCZF.png",
-  processIllustration: base + "kkswHg5.png",
-  floatingAi: base + "Y3L6kaQ.png",
-  mark: base + "3MangNx.png",
-  cubeBlue: base + "mPO3hsy.png",
-  ballPink: base + "FGBYPXW.png",
-  cubeOrange: base + "iO2hx3X.png",
-  aiGif: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmk5azh3YXR4MzN3Zm01cmkwN3hlZ3VpcTRsM3M4aGp4cmg3YzE1ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iHoq17SKrO6de161hh/giphy.gif",
-  headshots: {
-    timo: base + "bGKqok5.png",
-    catherine: base + "OTSnejm.png",
-    tyler: base + "URhAnUX.png",
-  },
+  logoMark: base + "logo-mark.png",
+  heroIllustration: base + "hero-illustration.webp",
+  strategyIllustration: base + "strategy-illustration.webp",
+  processIllustration: base + "process-illustration.webp",
+  floatingAi: base + "floating-ai.png",
+  mark: base + "mark-alvarez.webp",
+  cubeBlue: base + "cube-blue.png",
+  ballPink: base + "ball-pink.png",
+  cubeOrange: base + "cube-orange.png",
+  alvyOrb: base + "alvy-orb.gif",
   clientLogos: {
-    siemens: base + "2noIzKz.png",
-    ccs: base + "rNqDPHa.png",
-    preparedHero: base + "Z8Q9Gnd.png",
+    siemens: base + "client-siemens-eda.png",
+    ccs: base + "client-ccs.png",
+    preparedHero: base + "client-prepared-hero.png",
+    mayerBrown: base + "client-mayer-brown.png",
+    lifespace: base + "client-lifespace.png",
+    smuCox: base + "client-smu-cox.png",
   },
   platforms: [
-    { name: "Anthropic", src: base + "rWhTs2K.png" },
-    { name: "OpenAI", src: base + "1OroYCJ.png" },
-    { name: "Microsoft Copilot", src: base + "8C1PthU.png" },
-    { name: "Google Gemini", src: base + "z3uRbxV.png" },
-    { name: "IBM Watson", src: base + "7ZubkDB.png" },
-    { name: "Perplexity", src: base + "FQB98UB.png" },
-    { name: "Meta", src: base + "WNmebho.png" },
-    { name: "Hugging Face", src: base + "JEU0gdR.png" },
-    { name: "DeepSeek", src: base + "Votus3X.png" },
+    { name: "Anthropic", src: base + "platform-anthropic.png" },
+    { name: "OpenAI", src: base + "platform-openai.png" },
+    { name: "Microsoft Copilot", src: base + "platform-copilot.png" },
+    { name: "Google Gemini", src: base + "platform-gemini.png" },
+    { name: "IBM Watson", src: base + "platform-ibm-watson.png" },
+    { name: "Perplexity", src: base + "platform-perplexity.png" },
+    { name: "Meta", src: base + "platform-meta.png" },
+    { name: "Hugging Face", src: base + "platform-hugging-face.png" },
+    { name: "DeepSeek", src: base + "platform-deepseek.png" },
   ],
 };

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { site, contact } from "./content";
+import { img } from "./assets";
 
 type Msg = { role: "user" | "alvy"; text: string };
 
@@ -20,13 +21,7 @@ async function alvyReply(history: Msg[]): Promise<string> {
 }
 
 function Orb() {
-  return (
-    <div className="relative mx-auto h-20 w-20" aria-hidden>
-      <div className="anim-orbit absolute inset-0 rounded-full bg-gradient-to-br from-blue via-violet to-fuchsia blur-md opacity-80" />
-      <div className="absolute inset-2 rounded-full bg-gradient-to-tr from-cyan-300 via-blue to-fuchsia opacity-90 blur-[2px]" />
-      <div className="absolute inset-4 rounded-full bg-gradient-to-bl from-white/90 via-violet/70 to-pink/80 blur-[1px]" />
-    </div>
-  );
+  return <img src={img.alvyOrb} alt="" className="mx-auto h-24 w-auto mix-blend-multiply md:h-28" aria-hidden />;
 }
 
 export default function Alvy() {

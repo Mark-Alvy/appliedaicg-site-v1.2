@@ -6,15 +6,13 @@ import { site, nav, hero, imperative, services, approach, process, growth, testi
 // Flip to true once Nina Flax, Nicole Ornelas, and Tony Bridwell have signed off on their quotes.
 const SHOW_PENDING_TESTIMONIALS = false;
 
-const headshot: Record<string, string> = {
-  "Timo Nentwich": img.headshots.timo,
-  "Catherine McNealy": img.headshots.catherine,
-  "Tyler Woychyshyn": img.headshots.tyler,
-};
 const clientLogo: Record<string, string> = {
   "Timo Nentwich": img.clientLogos.siemens,
   "Catherine McNealy": img.clientLogos.ccs,
   "Tyler Woychyshyn": img.clientLogos.preparedHero,
+  "Nina Flax": img.clientLogos.mayerBrown,
+  "Nicole Ornelas": img.clientLogos.lifespace,
+  "Dr. Tony Bridwell": img.clientLogos.smuCox,
 };
 const badge = ["bg-blue", "bg-purple", "bg-mint"];
 const tileGrad = [
@@ -40,7 +38,7 @@ function Header() {
     <header className="sticky top-0 z-40 border-b border-line/70 bg-white/85 backdrop-blur">
       <div className="container-x flex h-16 items-center justify-between">
         <a href="#top" className="flex items-center gap-3">
-          <img src="/mark.png" alt="" className="h-9 w-auto" />
+          <img src={img.logoMark} alt="" className="h-9 w-auto" />
           <span className="text-base font-bold tracking-tight text-navy">{site.name}</span>
         </a>
         <nav className="hidden items-center gap-7 md:flex">
@@ -102,9 +100,9 @@ function Platforms() {
     <section className="border-y border-line bg-white py-8">
       <div className="container-x">
         <p className="text-center text-xs font-semibold tracking-widest text-slate">BUILT ON THE PLATFORMS YOU ALREADY RUN</p>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-5 opacity-80 grayscale transition hover:grayscale-0">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-5">
           {img.platforms.map((p) => (
-            <img key={p.name} src={p.src} alt={p.name} title={p.name} className="h-8 w-auto object-contain" />
+            <img key={p.name} src={p.src} alt={p.name} title={p.name} className="h-11 w-auto object-contain opacity-90 transition hover:scale-110 hover:opacity-100" />
           ))}
         </div>
       </div>
@@ -209,7 +207,7 @@ function Process() {
             </div>
           ))}
         </div>
-        <img src={img.processIllustration} alt="Illustration of the AI implementation process" className="mx-auto mt-14 w-full max-w-2xl" />
+        <img src={img.processIllustration} alt="Illustration of the AI implementation process" className="anim-float mx-auto mt-14 w-full max-w-xl" />
       </div>
     </section>
   );
@@ -239,7 +237,7 @@ function Growth() {
         </div>
         <div className="relative md:col-span-5">
           <div className="ring-orb right-[-10%] top-[0%] h-72 w-72 bg-pink" />
-          <img src={img.aiGif} alt="Animated AI illustration" className="relative mx-auto w-64 rounded-3xl shadow-2xl md:w-72" />
+          <img src={img.alvyOrb} alt="Animated Alvy orb" className="relative mx-auto w-64 mix-blend-multiply md:w-80" />
         </div>
       </div>
     </section>
@@ -259,7 +257,6 @@ function Testimonials() {
               {clientLogo[t.name] && <img src={clientLogo[t.name]} alt="" className="mb-5 h-8 w-auto self-start object-contain" />}
               <blockquote className="flex-1 leading-relaxed text-slate">“{t.quote}”</blockquote>
               <figcaption className="mt-6 flex items-center gap-3">
-                {headshot[t.name] && <img src={headshot[t.name]} alt="" className="h-12 w-12 rounded-full object-cover ring-2 ring-blue/20" />}
                 <div>
                   <div className="font-semibold text-navy">{t.name}</div>
                   <div className="text-sm text-slate">{t.title}</div>
@@ -299,7 +296,7 @@ function Footer() {
     <footer className="bg-navy py-14 text-white">
       <div className="container-x grid gap-10 md:grid-cols-3">
         <div>
-          <img src="/logo.png" alt="Applied AI Consulting Group" className="h-16 w-auto rounded-md bg-white/95 p-2" />
+          <img src={img.logoMark} alt="Applied AI Consulting Group" className="h-16 w-auto rounded-md bg-white/95 p-2" />
           <p className="mt-4 max-w-xs text-sm text-white/70">{footer.tagline}</p>
         </div>
         <div className="text-sm">
