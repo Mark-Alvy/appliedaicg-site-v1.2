@@ -144,9 +144,13 @@ export default function Alvy() {
               <input name="email" type="email" required placeholder="Work email" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20" />
               <input name="company" placeholder="Company" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20 sm:col-span-2" />
               <textarea name="message" required rows={4} placeholder="What are you trying to get done?" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20 sm:col-span-2" />
-              <button type="submit" disabled={status === "sending" || status === "sent"} className="btn-primary sm:col-span-2 disabled:opacity-60">
-                {status === "sent" ? "Sent" : status === "sending" ? "Sending" : "Send message →"}
-              </button>
+              {status === "sent" ? (
+                <p role="status" className="text-base font-medium text-navy sm:col-span-2">Thank you. Your message has reached Mark, and you will hear back within one business day.</p>
+              ) : (
+                <button type="submit" disabled={status === "sending"} className="btn-primary sm:col-span-2 disabled:opacity-60">
+                  {status === "sending" ? "Sending" : "Send message →"}
+                </button>
+              )}
               {status === "error" && <p className="text-sm text-red-600 sm:col-span-2">Something went wrong. Email us at {site.email}.</p>}
             </div>
           </form>
