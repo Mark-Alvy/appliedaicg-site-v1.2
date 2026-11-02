@@ -2,9 +2,9 @@ export const site = {
   name: "Applied AI Consulting Group",
   email: "markalvarez@appliedaicg.com",
   linkedinCompany: "https://www.linkedin.com/company/applied-ai-consulting-group/",
-  linkedinMark: "https://www.linkedin.com/in/markalvy/",
+  linkedinMark: "https://www.linkedin.com/in/-markalvarez/",
   bookingUrl: "#contact",
-  formspree: "https://formspree.io/f/REPLACE_ME",
+  formspree: "https://formspree.io/f/mgvyoygb",
 };
 
 export const nav = [
