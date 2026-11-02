@@ -34,18 +34,12 @@ const floaters = (list: Fl[]) =>
   ));
 
 const heroFl: Fl[] = [
-  { t: "cube", s: 40, p: "left-[12%] top-[10%]", k: 1, d: 0, du: 3.5, o: 0.75, sm: true, u: true },
-  { t: "ball", s: 32, p: "left-[8%] top-[21%]", k: 2, d: 1, du: 4.2, o: 0.7, sm: true, u: true },
-  { t: "orange", s: 48, p: "left-[81%] top-[6%]", k: 3, d: 0.7, du: 4.8, o: 0.8, sm: true, u: true },
-  { t: "ball", s: 36, p: "left-[71%] top-[11%]", k: 4, d: 1.5, du: 3.8, o: 0.65, sm: true, u: true },
-  { t: "orange", s: 36, p: "left-[5%] top-[33%]", k: 5, d: 2, du: 4.5, o: 0.7, sm: true, u: true },
-  { t: "cube", s: 32, p: "left-[15%] top-[44%]", k: 6, d: 0.3, du: 3.2, o: 0.75, sm: true, u: true },
-  { t: "cube", s: 40, p: "left-[88%] top-[27%]", k: 7, d: 1.2, du: 4.1, o: 0.65, sm: true, u: true },
-  { t: "orange", s: 36, p: "left-[78%] top-[48%]", k: 8, d: 0.8, du: 3.7, o: 0.7, sm: true, u: true },
-  { t: "cube", s: 44, p: "left-[18%] top-[75%]", k: 2, d: 1.8, du: 4.3, o: 0.75, sm: true, u: true },
-  { t: "ball", s: 32, p: "left-[9%] top-[69%]", k: 5, d: 0.5, du: 3.9, o: 0.7, sm: true, u: true },
-  { t: "cube", s: 36, p: "left-[68%] top-[80%]", k: 1, d: 1.3, du: 4.6, o: 0.65, sm: true, u: true },
-  { t: "ball", s: 40, p: "left-[84%] top-[70%]", k: 6, d: 2.1, du: 3.4, o: 0.7, sm: true, u: true },
+  { t: "cube", s: 40, p: "left-[5%] top-[6px]", k: 1, d: 0, du: 3.5, o: 0.75, sm: true, u: true },
+  { t: "ball", s: 30, p: "left-[17%] top-[40px]", k: 2, d: 1, du: 4.2, o: 0.7, sm: true, u: true },
+  { t: "orange", s: 40, p: "right-[5%] top-[6px]", k: 3, d: 0.7, du: 4.8, o: 0.8, sm: true, u: true },
+  { t: "cube", s: 30, p: "right-[17%] top-[40px]", k: 4, d: 1.5, du: 3.8, o: 0.65, sm: true, u: true },
+  { t: "orange", s: 30, p: "bottom-[0px] left-[8%]", k: 5, d: 2, du: 4.5, o: 0.7, sm: true, u: true },
+  { t: "ball", s: 30, p: "bottom-[0px] right-[9%]", k: 6, d: 0.3, du: 3.2, o: 0.75, sm: true, u: true },
 ];
 const strategyFl: Fl[] = [
   { t: "orange", s: 34, p: "left-[2%] top-[8%]", k: 4, d: 1 },
@@ -113,7 +107,7 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="top" className="surface-soft relative flex min-h-[60vh] items-center justify-center overflow-hidden pb-8 pt-5 lg:pb-12 lg:pt-6">
+    <section id="top" className="surface-soft relative flex items-center justify-center overflow-hidden pb-2 pt-5 lg:pb-3 lg:pt-6">
       <div className="container-x relative grid items-center gap-8 lg:grid-cols-2">
         <div className="anim-slide-left space-y-6 text-center lg:text-left">
           <div className="space-y-3">
@@ -129,10 +123,10 @@ function Hero() {
             <a href="#contact" className="inline-flex transform items-center justify-center rounded-full bg-blue px-8 py-4 text-lg font-medium text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-orange-500 hover:shadow-xl">{hero.primary}</a>
             <a href="#process" className="btn-ghost">{hero.secondary} →</a>
           </div>
-          <p className="anim-fade-d12 mx-auto max-w-xl text-sm leading-relaxed text-slate lg:mx-0">{hero.trust}</p>
+          <p className="anim-fade-d12 mx-auto max-w-xl pt-4 text-sm leading-relaxed text-slate lg:mx-0">{hero.trust}</p>
         </div>
         <div className="anim-slide-right relative ml-auto flex items-center justify-end">
-          <div className="relative pt-[84px]">
+          <div className="relative pb-8 pt-[84px]">
             <img src={img.heroIllustration} alt="Isometric illustration of connected AI systems" width={768} height={600} className="anim-float w-full max-w-5xl opacity-90" />
             <div className="pointer-events-none absolute inset-0">{floaters(heroFl)}</div>
           </div>
