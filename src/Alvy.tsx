@@ -145,7 +145,7 @@ export default function Alvy() {
               <input name="company" placeholder="Company" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20 sm:col-span-2" />
               <textarea name="message" required rows={4} placeholder="What are you trying to get done?" className="rounded-xl border border-line px-4 py-3 text-sm outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20 sm:col-span-2" />
               {status === "sent" ? (
-                <p role="status" className="text-base font-medium text-navy sm:col-span-2">Thank you. Your message has reached Mark, and you will hear back within one business day.</p>
+                <p role="status" className="text-base font-medium text-navy sm:col-span-2">Thank you. Your message has reached Mark and he will be in touch shortly.</p>
               ) : (
                 <button type="submit" disabled={status === "sending"} className="btn-primary sm:col-span-2 disabled:opacity-60">
                   {status === "sending" ? "Sending" : "Send message →"}
