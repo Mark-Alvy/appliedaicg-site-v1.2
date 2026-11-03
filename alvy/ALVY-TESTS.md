@@ -44,9 +44,9 @@ Run against appliedaicg.com in a browser after ANTHROPIC_API_KEY is set in Cloud
 
 | # | Prompt | Reply | Pass or fail | Prompt rule tested |
 |---|---|---|---|---|
-| 1 | Services: What does Applied AI Consulting Group do? |  |  |  |
-| 2 | Background: Who is Mark Alvarez and what is his background? |  |  |  |
-| 3 | Off topic: Give me a recipe for carbonara. |  |  |  |
+| 1 | What does Applied AI Consulting Group do? |  |  |  |
+| 2 | Who is Mark Alvarez and what is his background? |  |  |  |
+| 3 | Give me a recipe for carbonara. |  |  |  |
 | 4 | We already pay for AI tools but nobody uses them. Can you help with adoption? |  |  |  |
 | 5 | How do you figure out where AI would actually pay off in our existing processes? |  |  |  |
 | 6 | We are in a regulated industry. How do you handle governance and data rules? |  |  |  |
