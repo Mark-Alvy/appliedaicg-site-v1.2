@@ -1,22 +1,42 @@
 import { useEffect, useRef, useState } from "react";
 import { site, contact } from "./content";
 
-type Msg = { role: "user" | "alvy"; text: string };
+type Msg = {
+  role: "user" | "alvy";
+  text: string; // what the visitor sees
+  raw?: string; // what the model said, kept for history
+  notice?: boolean; // local message, never sent to the model
+  booking?: boolean; // show the calendar picker under this message
+};
 
-// Phase 3 replaces this with a call to the Alvy worker (Claude API + Google Calendar).
-async function alvyReply(history: Msg[]): Promise<string> {
-  const last = history[history.length - 1]?.text.toLowerCase() ?? "";
-  await new Promise((r) => setTimeout(r, 900));
-  if (/(book|schedule|call|meeting|time|calendar)/.test(last)) {
-    return "Happy to set that up. Pick a slot that works for you on the calendar below the form, or tell me the days and times you prefer and I will pass them to Mark.";
+const COPY = {
+  limit: "That is as far as I can take this one. For anything more, book a 30 minute strategy call or send a note through the form below.",
+  rate: "You are moving faster than I can keep up. Give it a minute and try again.",
+  busy: "Something went wrong on my end. Try again in a moment, or use the form below and a person will follow up.",
+};
+
+const MARKER = /\[\[BOOK\s+name="([^"]*)"\s+email="([^"]*)"\s+topic="([^"]*)"\s*\]\]/;
+
+// Hide the booking marker, including a half streamed one.
+function visibleText(raw: string): string {
+  const i = raw.indexOf("[[");
+  let t = i === -1 ? raw : raw.slice(0, i);
+  if (i === -1 && t.endsWith("[")) t = t.slice(0, -1);
+  return t.trimEnd();
+}
+
+async function postLead(lead: { name: string; email: string; topic: string }) {
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email)) return;
+  const data = new FormData();
+  data.set("name", lead.name);
+  data.set("email", lead.email);
+  data.set("topic", lead.topic);
+  data.set("source", "Alvy chat");
+  try {
+    await fetch(site.formspree, { method: "POST", body: data, headers: { Accept: "application/json" } });
+  } catch {
+    /* the picker is already open; a lost lead is not shown to the visitor */
   }
-  if (/(price|cost|rate|fee|budget)/.test(last)) {
-    return "Engagements are fixed scope with a date and a baseline agreed up front, so pricing follows the scope. The first 30 minute call and the written assessment that follows are free.";
-  }
-  if (/(service|do you|what can|help with|offer)/.test(last)) {
-    return "Three things: designing your AI operating model, building agentic workflows inside the platforms you already run (Claude, Microsoft 365, Copilot Studio), and enabling leadership teams to work with AI daily. Which one is closest to what you are working on?";
-  }
-  return "Thanks. Tell me a little about the workflow or decision you are trying to improve, and whether you would like to book a 30 minute call with Mark. I can take it from there.";
 }
 
 function Orb() {
@@ -33,6 +53,7 @@ export default function Alvy() {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
+  const [limited, setLimited] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const scroller = useRef<HTMLDivElement>(null);
@@ -41,17 +62,77 @@ export default function Alvy() {
     scroller.current?.scrollTo({ top: scroller.current.scrollHeight, behavior: "smooth" });
   }, [messages, thinking]);
 
+  function addAlvy(m: Omit<Msg, "role">) {
+    setMessages((prev) => [...prev, { role: "alvy", ...m }]);
+  }
+
+  async function ask(history: Msg[]) {
+    const body = JSON.stringify({
+      messages: history.filter((m) => !m.notice).map((m) => ({ role: m.role === "alvy" ? "assistant" : "user", content: m.raw ?? m.text })),
+    });
+    let raw = "";
+    let started = false;
+    try {
+      const res = await fetch("/api/alvy", { method: "POST", headers: { "content-type": "application/json" }, body });
+      if (!res.ok || !res.body) {
+        let code = "";
+        try { code = (await res.json()).error ?? ""; } catch { /* no body */ }
+        if (res.status === 429 && code === "conversation_limit") {
+          setLimited(true);
+          addAlvy({ text: COPY.limit, notice: true });
+        } else if (res.status === 429) {
+          addAlvy({ text: COPY.rate, notice: true });
+        } else {
+          addAlvy({ text: COPY.busy, notice: true });
+        }
+        return;
+      }
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        raw += decoder.decode(value, { stream: true });
+        const text = visibleText(raw);
+        if (!text) continue;
+        if (!started) {
+          started = true;
+          setThinking(false);
+          setMessages((prev) => [...prev, { role: "alvy", text, raw }]);
+        } else {
+          setMessages((prev) => [...prev.slice(0, -1), { role: "alvy", text, raw }]);
+        }
+      }
+      raw += decoder.decode();
+      const found = raw.match(MARKER);
+      const wantsBooking = raw.includes("[[BOOK");
+      if (!raw.trim()) {
+        addAlvy({ text: COPY.busy, notice: true });
+      } else if (wantsBooking) {
+        const text = visibleText(raw);
+        setThinking(false);
+        setMessages((prev) => {
+          const m: Msg = { role: "alvy", text, raw, booking: true };
+          return started ? [...prev.slice(0, -1), m] : [...prev, m];
+        });
+        void postLead({ name: found?.[1] ?? "", email: found?.[2] ?? "", topic: found?.[3] ?? "" });
+      }
+    } catch {
+      addAlvy({ text: COPY.busy, notice: true });
+    } finally {
+      setThinking(false);
+    }
+  }
+
   async function send(e?: React.FormEvent) {
     e?.preventDefault();
     const text = input.trim();
-    if (!text || thinking) return;
+    if (!text || thinking || limited) return;
     const next = [...messages, { role: "user", text } as Msg];
     setMessages(next);
     setInput("");
     setThinking(true);
-    const reply = await alvyReply(next);
-    setThinking(false);
-    setMessages([...next, { role: "alvy", text: reply }]);
+    await ask(next);
   }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -91,13 +172,22 @@ export default function Alvy() {
                 </div>
               )}
               {messages.map((m, i) => (
-                <div key={i} className={"flex " + (m.role === "user" ? "justify-end" : "justify-start")}>
-                  <div className={
-                    "max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm " +
-                    (m.role === "user" ? "rounded-br-md bg-blue text-white" : "rounded-bl-md border border-line bg-white text-ink")
-                  }>
-                    {m.text}
-                  </div>
+                <div key={i} className="space-y-3">
+                  {m.text && (
+                    <div className={"flex " + (m.role === "user" ? "justify-end" : "justify-start")}>
+                      <div className={
+                        "max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm " +
+                        (m.role === "user" ? "rounded-br-md bg-blue text-white" : "rounded-bl-md border border-line bg-white text-ink")
+                      }>
+                        {m.text}
+                      </div>
+                    </div>
+                  )}
+                  {m.booking && (
+                    <div className="overflow-hidden rounded-2xl border border-line bg-white shadow-sm">
+                      <iframe src={site.bookingUrl} title="Book a 30 minute call with Mark" loading="lazy" className="h-[420px] w-full" />
+                    </div>
+                  )}
                 </div>
               ))}
               {thinking && (
@@ -117,8 +207,9 @@ export default function Alvy() {
                 placeholder="Ask Alvy..."
                 className="flex-1 rounded-xl border border-line bg-mist px-4 py-3 text-sm outline-none transition focus:border-blue focus:bg-white focus:ring-2 focus:ring-blue/20"
                 aria-label="Message Alvy"
+                disabled={limited}
               />
-              <button type="submit" disabled={!input.trim() || thinking} className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-blue to-violet text-white shadow-md transition hover:scale-105 disabled:opacity-50" aria-label="Send">
+              <button type="submit" disabled={!input.trim() || thinking || limited} className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-blue to-violet text-white shadow-md transition hover:scale-105 disabled:opacity-50" aria-label="Send">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" /></svg>
               </button>
             </form>
