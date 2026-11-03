@@ -13,7 +13,7 @@ interface Env {
 
 const MODEL = 'claude-sonnet-5-5'
 const ANTHROPIC_VERSION = '2026-10-21'
-const MAX_OUTPUT_TOKENS = 500
+const MAX_OUTPUT_TOKENS = 700
 const HISTORY_LIMIT = 10
 const VISITOR_MESSAGE_CAP = 12
 const RATE_LIMIT = 30
@@ -155,9 +155,14 @@ function sseToText(upstream: ReadableStream<Uint8Array>): ReadableStream<Uint8Ar
         stopReason = event.delta?.stop_reason ?? stopReason
         break
       case 'message_stop':
-        finished = true
-        controller.enqueue(encoder.encode(END_MARKER))
-        console.log(JSON.stringify({ alvy_usage: usage, stop_reason: stopReason }))
+        if (stopReason === 'end_turn') {
+          finished = true
+          controller.enqueue(encoder.encode(END_MARKER))
+          console.log(JSON.stringify({ alvy_usage: usage, stop_reason: stopReason }))
+        } else {
+          // max_tokens, refusal, or anything else: the reply is not trusted as complete, so no end marker.
+          console.error(JSON.stringify({ alvy_stop_reason: stopReason || 'none', text_chars: textChars, usage }))
+        }
         break
       case 'error':
         // Type only. Lets `wrangler tail` or the dashboard logs show why a reply was cut short.
@@ -252,6 +257,8 @@ export default {
           max_tokens: MAX_OUTPUT_TOKENS,
           stream: true,
           system: [{ type: 'text', text: SYSTEM_TEXT, cache_control: { type: 'ephemeral' } }],
+          // Sonnet 5.5 rejects thinking disabled; between_tools turns off up front thinking, which would use the reply budget.
+          thinking: { type: 'between_tools' },
           messages: history,
         }),
         signal: request.signal,

@@ -24,7 +24,7 @@ Last run of Part A: 2026-11-03, local Worker (wrangler dev) with a mock upstream
 | Upstream overloaded | 503 busy | Pass |
 | Upstream error in the middle of a stream | Partial text delivered, stream ends in error | Pass |
 | ANTHROPIC_API_KEY not set | 500 server_config | Pass |
-| Request sent to Claude | Model claude-sonnet-5-5, max_tokens 500, prompt caching on the system block, last 10 messages only, no temperature or sampling parameters | Pass |
+| Request sent to Claude | Model claude-sonnet-5-5, max_tokens 700, thinking type between_tools, prompt caching on the system block, last 10 messages only, no temperature or sampling parameters | Pass |
 | System text sent to Claude | Contains the system prompt, ALVY-FACTS.md and MARK-BIO.md; no client names | Pass |
 | Streamed reply with a multibyte character | Intact in the panel | Pass |
 | Booking marker streamed in pieces | Never visible in the panel | Pass |
@@ -34,6 +34,9 @@ Last run of Part A: 2026-11-03, local Worker (wrangler dev) with a mock upstream
 | Conversation limit reply from the server | Approved limit message shown, input and Send disabled | Pass |
 | Rate limit reply from the server | Approved rate limit message shown | Pass |
 | Busy or error reply from the server | Approved busy message shown | Pass |
+| Reply stopped by the token cap (stop reason max_tokens) | No end marker, panel drops the partial reply and shows the busy message, stop reason logged | Pass |
+| Reply cut off without an end marker (upstream closed early or errored) | Panel drops the partial reply and shows the busy message | Pass |
+| Reply that finished (stop reason end_turn) | End marker added, hidden in the panel, never sent back as history | Pass |
 | Local notice messages | Never sent back to Claude in the history | Pass |
 
 Not covered by Part A: the real Google Calendar picker rendering inside the panel, and anything Claude says. Both are checked in Part B.
