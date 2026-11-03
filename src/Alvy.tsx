@@ -15,6 +15,9 @@ const COPY = {
   busy: "Something went wrong on my end. Try again in a moment, or use the form below and a person will follow up.",
 };
 
+// The Worker appends this after a reply that finished. A reply without it was cut off.
+const END_MARKER = "[[END]]";
+
 const MARKER = /\[\[BOOK\s+name="([^"]*)"\s+email="([^"]*)"\s+topic="([^"]*)"\s*\]\]/;
 
 // Hide the booking marker, including a half streamed one.
@@ -104,11 +107,22 @@ export default function Alvy() {
         }
       }
       raw += decoder.decode();
+      if (!raw.includes(END_MARKER)) {
+        // Cut off before the end: drop the partial reply and show the busy message.
+        if (started) setMessages((prev) => prev.slice(0, -1));
+        addAlvy({ text: COPY.busy, notice: true });
+        return;
+      }
+      raw = raw.replace(END_MARKER, "");
       const found = raw.match(MARKER);
       const wantsBooking = raw.includes("[[BOOK");
       if (!raw.trim()) {
         addAlvy({ text: COPY.busy, notice: true });
-      } else if (wantsBooking) {
+      } else if (!wantsBooking) {
+        // Store the reply without the end marker so it is safe to send back as history.
+        const text = visibleText(raw);
+        setMessages((prev) => [...prev.slice(0, -1), { role: "alvy", text, raw }]);
+      } else {
         const text = visibleText(raw);
         setThinking(false);
         setMessages((prev) => {
@@ -118,6 +132,7 @@ export default function Alvy() {
         void postLead({ name: found?.[1] ?? "", email: found?.[2] ?? "", topic: found?.[3] ?? "" });
       }
     } catch {
+      if (started) setMessages((prev) => prev.slice(0, -1));
       addAlvy({ text: COPY.busy, notice: true });
     } finally {
       setThinking(false);

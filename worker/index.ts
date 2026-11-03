@@ -101,28 +101,38 @@ function parseMessages(payload: unknown): ChatMessage[] | null {
   return messages
 }
 
-/** Turns Anthropic server sent events into a plain text stream of the reply. */
+/** Appended after the last character of a reply that finished cleanly. The panel treats any reply without it as cut off. */
+const END_MARKER = '[[END]]'
+
+/**
+ * Turns Anthropic server sent events into a plain text stream of the reply.
+ * A reply that ends cleanly is followed by END_MARKER. A reply the platform or the upstream
+ * cut short ends without it, and the reason is logged (types and counts only, never content).
+ */
 function sseToText(upstream: ReadableStream<Uint8Array>): ReadableStream<Uint8Array> {
   const decoder = new TextDecoder()
   const encoder = new TextEncoder()
   let buffer = ''
+  let finished = false
+  let stopReason = ''
   const usage = { input: 0, cacheWrite: 0, cacheRead: 0, output: 0 }
+  let textChars = 0
 
   const handleEvent = (raw: string, controller: TransformStreamDefaultController<Uint8Array>) => {
-    const data = raw
-      .split(/\r?\n/)
-      .filter((line) => line.startsWith('data:'))
-      .map((line) => line.slice(5).replace(/^ /, ''))
-      .join('\n')
-    if (!data) return
+    // Cheap exits first: pings and anything that is not one of the events we use.
+    const i = raw.indexOf('data:')
+    if (i === -1) return
+    const kind = raw.slice(0, i)
+    if (kind.includes('ping')) return
     let event: {
       type?: string
-      delta?: { type?: string; text?: string }
+      delta?: { type?: string; text?: string; stop_reason?: string }
       message?: { usage?: Record<string, number> }
       usage?: Record<string, number>
+      error?: { type?: string }
     }
     try {
-      event = JSON.parse(data)
+      event = JSON.parse(raw.slice(i + 5))
     } catch {
       return
     }
@@ -136,18 +146,23 @@ function sseToText(upstream: ReadableStream<Uint8Array>): ReadableStream<Uint8Ar
       }
       case 'content_block_delta':
         if (event.delta?.type === 'text_delta' && typeof event.delta.text === 'string') {
+          textChars += event.delta.text.length
           controller.enqueue(encoder.encode(event.delta.text))
         }
         break
       case 'message_delta':
         usage.output = event.usage?.output_tokens ?? usage.output
+        stopReason = event.delta?.stop_reason ?? stopReason
         break
       case 'message_stop':
-        // Token counts only, never content. Lets `wrangler tail` confirm caching works.
-        console.log(JSON.stringify({ alvy_usage: usage }))
+        finished = true
+        controller.enqueue(encoder.encode(END_MARKER))
+        console.log(JSON.stringify({ alvy_usage: usage, stop_reason: stopReason }))
         break
       case 'error':
-        controller.error(new Error('upstream_stream_error'))
+        // Type only. Lets `wrangler tail` or the dashboard logs show why a reply was cut short.
+        console.error(JSON.stringify({ alvy_upstream_error: event.error?.type ?? 'unknown', text_chars: textChars }))
+        controller.terminate()
         break
       default:
         break
@@ -157,17 +172,20 @@ function sseToText(upstream: ReadableStream<Uint8Array>): ReadableStream<Uint8Ar
   const transform = new TransformStream<Uint8Array, Uint8Array>({
     transform(chunk, controller) {
       buffer += decoder.decode(chunk, { stream: true })
-      for (;;) {
-        const boundary = buffer.match(/\r?\n\r?\n/)
-        if (!boundary || boundary.index === undefined) break
-        const raw = buffer.slice(0, boundary.index)
-        buffer = buffer.slice(boundary.index + boundary[0].length)
+      if (buffer.includes('\r')) buffer = buffer.replace(/\r\n/g, '\n')
+      let at: number
+      while ((at = buffer.indexOf('\n\n')) !== -1) {
+        const raw = buffer.slice(0, at)
+        buffer = buffer.slice(at + 2)
         handleEvent(raw, controller)
       }
     },
     flush(controller) {
       buffer += decoder.decode()
       if (buffer.trim()) handleEvent(buffer, controller)
+      if (!finished) {
+        console.error(JSON.stringify({ alvy_stream_incomplete: true, text_chars: textChars, usage }))
+      }
     },
   })
 
@@ -252,7 +270,9 @@ export default {
     return new Response(sseToText(upstream.body), {
       headers: {
         'content-type': 'text/plain; charset=utf-8',
-        'cache-control': 'no-store',
+        // Streamed replies must not be compressed or buffered by the edge.
+        'cache-control': 'no-store, no-transform',
+        'content-encoding': 'identity',
         'x-content-type-options': 'nosniff',
       },
     })
