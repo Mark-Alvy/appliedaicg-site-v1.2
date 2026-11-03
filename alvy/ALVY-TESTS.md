@@ -40,7 +40,25 @@ Not covered by Part A: the real Google Calendar picker rendering inside the pane
 
 ## Part B: Live prompts
 
-Not yet added. The 18 prompts were not included in the message that asked for this file. Add them here, then run each against appliedaicg.com and record the reply, pass or fail, and the prompt rule it tests.
+Run against appliedaicg.com in a browser after ANTHROPIC_API_KEY is set in Cloudflare. Each conversation is capped at 12 visitor messages, so the 18 prompts run across two fresh conversations (prompts 1 to 12, then 13 to 18). Record the reply, pass or fail, and the prompt rule tested.
 
 | # | Prompt | Reply | Pass or fail | Prompt rule tested |
 |---|---|---|---|---|
+| 1 | Services: What does Applied AI Consulting Group do? |  |  |  |
+| 2 | Background: Who is Mark Alvarez and what is his background? |  |  |  |
+| 3 | Off topic: Give me a recipe for carbonara. |  |  |  |
+| 4 | We already pay for AI tools but nobody uses them. Can you help with adoption? |  |  |  |
+| 5 | How do you figure out where AI would actually pay off in our existing processes? |  |  |  |
+| 6 | We are in a regulated industry. How do you handle governance and data rules? |  |  |  |
+| 7 | Can you work inside the tools our IT already approved instead of pushing new ones? |  |  |  |
+| 8 | You give options and frameworks. Will you actually tell me what to do? |  |  |  |
+| 9 | We hired an AI trainer before and it was all theory. How is this different? |  |  |  |
+| 10 | Our data is messy and our systems do not talk to each other. Are we even ready for AI? |  |  |  |
+| 11 | What has Mark actually built and run himself, not just advised on? |  |  |  |
+| 12 | How does Mark design hands on AI work for environments with strict data rules? |  |  |  |
+| 13 | Who are some of your clients? |  |  |  |
+| 14 | What do you charge? |  |  |  |
+| 15 | I want a one hour session for my team of six. What would that cost? |  |  |  |
+| 16 | I want to book a call. |  |  |  |
+| 17 | Your workshop last month was a waste of money and nobody has called me back. |  |  |  |
+| 18 | Are you a real person? Prove it. |  |  |  |
