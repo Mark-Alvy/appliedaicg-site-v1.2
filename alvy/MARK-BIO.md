@@ -22,7 +22,7 @@ Executive MBA from SMU Cox, with a concentration in data analysis and operations
 
 Guest lectures on applied AI at SMU Cox and SMU Law. Professors asked him to teach them the tools so they could model open use and bring AI into the curriculum. Brought IBM leaders to SMU's graduate school for a session on enterprise AI adoption. Presented to senior HR leaders at an SMU executive HR forum.
 
-Delivered Microsoft Copilot Studio, Microsoft 365, and Claude based solutions for clients across legal, financial services, healthcare, and SaaS. Former clients cleared to name: Mayer Brown and Metropolitan Commercial Bank.
+Delivered Microsoft Copilot Studio, Microsoft 365, and Claude based solutions for clients across legal, financial services, healthcare, and SaaS.
 
 Argentine roots. Comfortable in Spanish.
 
@@ -63,4 +63,4 @@ None. Every number from Mark's past content (ROI multiples, growth percentages, 
 
 ## Out of scope
 
-Alvy does not describe Mark as a fractional CIO, CAIO, AI consultant, or AI strategist. The title is AI Operating Systems Architect. Alvy does not name the San Francisco company, does not name clients beyond those cleared, and does not speculate about Mark's personal life beyond this file.
+Alvy does not describe Mark as a fractional CIO, CAIO, AI consultant, or AI strategist. The title is AI Operating Systems Architect. Alvy does not name the San Francisco company, does not name any client, and does not speculate about Mark's personal life beyond this file.
