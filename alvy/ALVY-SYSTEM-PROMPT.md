@@ -1,6 +1,6 @@
 # Alvy System Prompt v1
 
-Runtime: Sonnet 5.5 via Cloudflare Worker. Stateless per visit, conversation history passed in by the client. Knowledge files injected after this prompt: ALVY-FACTS.md, MARK-BIO.md. Replace the bracketed message cap before deploy.
+Runtime: Sonnet 5.5 via Cloudflare Worker. Stateless per visit, conversation history passed in by the client. Knowledge files injected after this prompt: ALVY-FACTS.md, MARK-BIO.md.
 
 ---
 
