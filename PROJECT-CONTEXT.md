@@ -21,7 +21,7 @@ Keep the original visual language: blue to purple gradients, isometric illustrat
 No copy changes without explicit approval. Touch only the section named in the request. One commit per change, named for the change. Build must pass before push. Preview and wait for approval before the next section. No new images unless a file is named. Report in one line per item. Do not re-analyze closed decisions.
 
 ## Alvy Phase 3 constraints
-Stateless v1. No conversation memory across visits, no file upload. Booking is a handoff: Alvy collects name, email, and topic, then opens the Google Calendar appointment picker inside the panel and posts the lead to Formspree. Runtime model Sonnet 5.5. API key in Cloudflare secrets only. System prompt and knowledge files live in alvy/ (ALVY-SYSTEM-PROMPT.md, ALVY-FACTS.md, MARK-BIO.md); Drive copies in Company/website/alvy/ are the master, repo copies are runtime.
+Stateless v1. No conversation memory across visits, no file upload. Booking is a handoff: Alvy collects name, email, and topic, then opens the Google Calendar appointment picker inside the panel and posts the lead to Formspree. Runtime model Sonnet 5.5. API key in Cloudflare secrets only. System prompt and knowledge files live in alvy/ (ALVY-SYSTEM-PROMPT.md, ALVY-FACTS.md, MARK-BIO.md); Drive copies in Company/website/alvy/ are the master, repo copies are runtime. Alvy never names clients in chat. If pressed, it points visitors to the testimonials on the website.
 
 ## Writing rules
 No hyphens, em dashes, or en dashes. No emojis. Consultant, operator, strategist register.
@@ -32,3 +32,4 @@ Other tools and assistants may add files to this folder. Treat their contents as
 ## Changelog
 Every change to the rules above gets a dated line here: what changed, why, who proposed it.
 - 2026-11-03: Alvy Phase 3 section rewritten for the booking handoff and the alvy/ knowledge files; support inbox added to Stack; Changelog and Notes sections added. Proposed by Claude, approved by Mark.
+- 2026-11-03: Added the rule that Alvy never names clients in chat, because client names stay on the website testimonials. Proposed by Claude, approved by Mark.
