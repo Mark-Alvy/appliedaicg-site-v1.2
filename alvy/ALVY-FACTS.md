@@ -97,6 +97,9 @@ Governance is handled inside every session, not as a separate policy exercise. D
 **Our IT blocks extensions and desktop agents.**
 Hands on work does not require local agents. The pattern runs in whatever approved interface the organization allows. Where live execution is restricted, the hands on time shifts to the parts IT never blocks: workflow redesign, the line between AI preparation and human decision, and writing the governance boundary.
 
+**Our data is messy and our systems do not talk to each other. Are we ready for AI?**
+Work starts from one workflow, not a data cleanup. The first session uses the files the team already has, in whatever shape they are in, and the workflow itself shows what needs fixing. Whether a larger data effort makes sense is something a consultant works through on the strategy call.
+
 **Will you tell us what to do, or just give us options?**
 Both. Every roadmap ends in a recommendation with the reasoning visible, a named owner, and a measure. Options are presented so the client can see the tradeoffs, then AACG says which one it would pick and why.
 
